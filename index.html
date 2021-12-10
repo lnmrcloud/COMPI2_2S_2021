@@ -7,30 +7,19 @@
 </head>
 
 <title>
-    TytusX Grupo 10
+   Quetzal OCL2
 </title>
 
-<h1 class="Titulo"> TytusX Grupo 10 </h1>
-<h3 class="subtitulo"> XPATH </h3>
+<h1 class="Titulo"> Quetzal OCL2 </h1>
 
 <body>
-    <table>
-        <tr>
-            <td>
-                <!-- AREA DE TEXTO PARA CONSULTA -->
-                <div id="ide2">
-                    <textarea id="txtXpath" class="txtarea" name="txtXpath" rows="5" cols="100"></textarea>
-                </div> 
-            </td>
-        </tr>
-    </table>
-    <h3 class="subtitulo">XML</h3>
+    <h3 class="subtitulo">CODIGO C</h3>
     <table>
         <tr>
             <td>
                 <!-- AREA DE TEXTO PARA XML -->
                 <div id="ide">
-                    <textarea id="txtXML" class="txtarea" name="txtXML" rows="30" cols="100"></textarea>
+                    <textarea id="txtXML" class="txtarea" name="txtXML" rows="30" cols="245"></textarea>
                     <br /><br />
                     <input type="file" name="inputfile" id="inputfile">
                     <input type="button" class="button" value="Analizar" onclick="analizar_xml();" /> <br /><br>
@@ -46,7 +35,7 @@
             <td>
                 <!-- AREA DE TEXTO PARA RESULTADO -->
                 <div id="ide3">
-                    <textarea id="console"  class="txtarea" name="console" rows="20" cols="100">>></textarea>
+                    <textarea id="console"  class="txtarea" name="console" rows="20" cols="245">>></textarea>
                     <br /><br />
                     <input type="button" class="button" value="Limpiar" onclick="javascript:clearConsole();" />
                 </div>  
@@ -66,7 +55,7 @@
                     <br>
                     <a id="tablaerror">Tabla Errores ASC</a>
                     <br>
-                    <textarea id="textogramatical" class="txtarea" name="txtXML" rows="50" cols="100"></textarea>
+                    <textarea id="textogramatical" class="txtarea" name="txtXML" rows="50" cols="245"></textarea>
                 </div>  
             </td>
         </tr>
@@ -204,24 +193,6 @@
             document.getElementById("tablaerror").setAttribute("href",tablaError);
         }
 
-
-        
-    function analizar_xpath() {
-
-        lexicalErrors = [];
-        syntaxErrors = [];
-        semanticErrors = [];
-        var toParse = document.getElementById("txtXpath").value;
-        var result = gramaticaXpath.parse(toParse);
-
-        document.getElementById('console').innerHTML = "";
-        
-        if (result != null) {
-            document.getElementById("console").innerHTML = "retorne valor de xpath";
-        } else {
-            document.getElementById("console").innerHTML = "no retorne valor de xpath";
-        }
-    }
 
     function clearConsole() {
         document.getElementById('console').innerHTML = "";
