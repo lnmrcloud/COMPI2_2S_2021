@@ -65,22 +65,25 @@
 
 <!-- AREA DE IMPORTS -->
 
-<!-- AST -->
+<!-- AST 
 <script src="dist/AST/Error.js"></script>
 <script src="dist/AST/Simbolo.js"></script>
 <script src="dist/AST/Tabla_errores.js"></script>
 <script src="dist/AST/Tabla_simbolos.js"></script>
 <script src="dist/AST/Tipo.js"></script>
 
-<!-- EXPRESIONES -->
+-->
+
+<!-- EXPRESIONES 
 <script src="dist/Expresiones/Atributo.js"></script>
 <script src="dist/Expresiones/entregable.js"></script>
-<script src="dist/Expresiones/Objeto.js"></script>
+<script src="dist/Expresiones/Objeto.js"></script>}
+
+-->
 
 <!-- GRAMATICA -->
 
 <script src="Gramatica\gramatica.js"></script>
-<script src="GramaticaXPATH\gramaticaXpath.js"></script>
 
 <script type="text/javascript">
     document.getElementById('inputfile')
@@ -131,7 +134,8 @@
 
         var toParse = document.getElementById("txtXML").value;
         var result = gramatica.parse(toParse);
-        result.CrearTabla();
+        
+        /*result.CrearTabla();
 
         //tabla de simbolos
         var contenido = result.graficarTablaSimbolos(contenido);
@@ -168,6 +172,7 @@
         } else {
             document.getElementById("console").innerHTML = "no retorne valor";
         }
+        */
     }
 
     function getURLAST(astAddress)
