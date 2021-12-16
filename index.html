@@ -17,12 +17,12 @@
     <table>
         <tr>
             <td>
-                <!-- AREA DE TEXTO PARA XML -->
+                <!-- AREA DE TEXTO PARA Quetzal -->
                 <div id="ide">
                     <textarea id="txtXML" class="txtarea" name="txtXML" rows="30" cols="245"></textarea>
                     <br /><br />
                     <input type="file" name="inputfile" id="inputfile">
-                    <input type="button" class="button" value="Analizar" onclick="analizar_xml();" /> <br /><br>
+                    <input type="button" class="button" value="Analizar" onclick="interpretar();" /> <br /><br>
 
                 </div>
             </td>
@@ -65,25 +65,35 @@
 
 <!-- AREA DE IMPORTS -->
 
-<!-- AST 
-<script src="dist/AST/Error.js"></script>
-<script src="dist/AST/Simbolo.js"></script>
-<script src="dist/AST/Tabla_errores.js"></script>
-<script src="dist/AST/Tabla_simbolos.js"></script>
-<script src="dist/AST/Tipo.js"></script>
+<!-- AST -->
+<script src="./AST/AST.js"></script>
+<script src="./AST/Entorno.js"></script>
+<script src="./AST/Simbolo.js"></script>
+<script src="./AST/Tipo.js"></script>
 
--->
+<!-- EXPRESIONES -->
+<script src="./Expresiones/AccesoName.js"></script>
+<script src="./Expresiones/Atributo.js"></script>
+<script src="./Expresiones/Operacion.js"></script>
+<script src="./Expresiones/Primitivo.js"></script>
 
-<!-- EXPRESIONES 
-<script src="dist/Expresiones/Atributo.js"></script>
-<script src="dist/Expresiones/entregable.js"></script>
-<script src="dist/Expresiones/Objeto.js"></script>}
-
--->
 
 <!-- GRAMATICA -->
 
-<script src="Gramatica\gramatica.js"></script>
+<script src="./Gramatica/ast_ascend.js"></script>
+<script src="./Gramatica/gramatica.js"></script>
+
+<!-- HERRAMIENTAS  -->
+
+<script src="./resources/js/codemirror.js"></script>
+<script src="./resources/js/Jquery.js"></script>
+<script src="./resources/js/bootstrap.js"></script>
+<script src="./resources/mode/javascript/javascript.js"></script>
+<script src="./resources/mode/pascal/pascal.js"></script>
+<script src="./resources/js/main.js"></script>
+
+<!-- INTERPRETACION  -->
+<script src="interpretar.js"></script> 
 
 <script type="text/javascript">
     document.getElementById('inputfile')
@@ -97,7 +107,53 @@
         })
 </script>
 
+<script>
+    
+    var entrada = CodeMirror.fromTextArea(document.getElementById("txtXML"), {
+        lineNumbers: true,
+        mode: "javascript"
+        
+    });    
+    entrada.setSize(450, 500);
+
+    var salida = CodeMirror.fromTextArea(document.getElementById("txtSalida"), {        
+        mode: "javascript"        
+    });    
+    salida.setSize(450, 500);
+    
+
+    var txttraduc = CodeMirror.fromTextArea(document.getElementById("txtTraduccion"), {        
+        mode: "javascript"        
+    });    
+    txttraduc.setSize(450, 500);
+   
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 <script type="text/javascript">
+
+
+
+
+
 
     function analizar_xml() {
         //graficar ast
@@ -135,6 +191,7 @@
         var toParse = document.getElementById("txtXML").value;
         var result = gramatica.parse(toParse);
         
+
         /*result.CrearTabla();
 
         //tabla de simbolos
@@ -202,6 +259,9 @@
         document.getElementById('console').innerHTML = "";
     }
 
+
 </script>
+
+-->
 
 </html>
