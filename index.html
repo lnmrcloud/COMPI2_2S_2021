@@ -72,6 +72,8 @@
 
 <!-- AREA DE IMPORTS -->
 
+<script>var exports = {};</script>
+
 <!-- AST -->
 <script src="./AST/AST.js"></script>
 <script src="./AST/Entorno.js"></script>
@@ -83,7 +85,6 @@
 <script src="./Expresiones/Atributo.js"></script>
 <script src="./Expresiones/Operacion.js"></script>
 <script src="./Expresiones/Primitivo.js"></script>
-
 
 <!-- GRAMATICA -->
 
@@ -98,6 +99,12 @@
 <script src="./resources/mode/javascript/javascript.js"></script>
 <script src="./resources/mode/pascal/pascal.js"></script>
 <script src="./resources/js/main.js"></script>
+
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+<script src="./chart/chart.js"></script>
+
 
 <!-- INTERPRETACION  -->
 <script src="interpretar.js"></script> 
@@ -123,7 +130,7 @@
     });    
     entrada.setSize(450, 500);
 
-    var salida = CodeMirror.fromTextArea(document.getElementById("txtSalida"), {        
+    var salida = CodeMirror.fromTextArea(document.getElementById("console"), {        
         mode: "javascript"        
     });    
     salida.setSize(450, 500);
