@@ -24,8 +24,8 @@ ___
 
 <**DECLARACION**> ::= <**TIPO**> <NAME> <RASIGNACION> <**EXPRESION**> <RPUNTOYCOMA> \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <**TIPO**> <**LISTA_DE_DECLARACION**> <RPUNTOYCOMA> \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <RSTRUCT> <NAME> <RIZQLLAVE> <**LISTA_DE_ATRIBUTOS**> <RDERLLAVE> <RPUNTOYCOMA> \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <**TIPO**> <RIZQCORCHETE> <RDERCORCHETE> <NAME> <RASIGNACION> <**CUERPO_ARRAY**> <RPUNTOYCOMA> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <RSTRUCT> &#60;NAME&#62;  &#60;RIZQLLAVE&#62; <**LISTA_DE_ATRIBUTOS**>  &#60;RDERLLAVE&#62; &#60;RPUNTOYCOMA&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <**TIPO**> &#60;RIZQCORCHETE&#62; &#60;RDERCORCHETE&#62; &#60;NAME&#62;  &#60;RASIGNACION&#62;<**CUERPO_ARRAY**> &#60;RPUNTOYCOMA&#62; 
 
 <**LISTA_DE_ATRIBUTOS**> ::= <**LISTA_DE_ATRIBUTOS**> <RCOMA> <**ATRIBUTO**> \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <**ATRIBUTO**>
