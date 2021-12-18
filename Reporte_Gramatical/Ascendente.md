@@ -27,69 +27,56 @@ ___
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <RSTRUCT> &#60;NAME&#62;  &#60;RIZQLLAVE&#62; <**LISTA_DE_ATRIBUTOS**>  &#60;RDERLLAVE&#62; &#60;RPUNTOYCOMA&#62; \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <**TIPO**> &#60;RIZQCORCHETE&#62; &#60;RDERCORCHETE&#62; &#60;NAME&#62;  &#60;RASIGNACION&#62;<**CUERPO_ARRAY**> &#60;RPUNTOYCOMA&#62; 
 
-<**LISTA_DE_ATRIBUTOS**> ::= <**LISTA_DE_ATRIBUTOS**> <RCOMA> <**ATRIBUTO**> \
+<**LISTA_DE_ATRIBUTOS**> ::= <**LISTA_DE_ATRIBUTOS**> &#60;RCOMA&#62; <**ATRIBUTO**> \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <**ATRIBUTO**>
 
-<**ATRIBUTO**> ::= <**TIPO**> <NAME> \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <NAME> <NAME>
+<**ATRIBUTO**> ::= <**TIPO**> &#60;NAME&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | &#60;NAME&#62; &#60;NAME&#62;
 
-LISTA_DE_DECLARACION  : LISTA_DE_DECLARACION RCOMA NAME      { $1.push($3); $$ = $1; }   
-                      | NAME                                 { $$ = [$1] }   
-;
+<**LISTA_DE_DECLARACION**> ::= <**LISTA_DE_DECLARACION**> &#60;RCOMA&#62; &#60;NAME&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | &#60;NAME&#62;
 
-CUERPO_ARRAY  : RIZQCORCHETE LISTA_DE_PARAMETROS RDERCORCHETE 
-;
+<**CUERPO_ARRAY**> ::= &#60;RIZQCORCHETE&#62; <**LISTA_DE_PARAMETROS**>  &#60;RDERCORCHETE&#62;
 
-ASIGNACION : NAME RASIGNACION EXPRESION RPUNTOYCOMA                                                         { $$ = new Asignacion($1, $3, @1.first_line, @1.first_column); }                  
-           | NAME NAME RASIGNACION NAME RIZQPARENTESIS LISTA_DE_PARAMETROS RDERPARENTESIS RPUNTOYCOMA
-;
+<**ASIGNACION**> ::= &#60;NAME&#62; &#60;RASIGNACION&#62;  <**EXPRESION**> &#60;RPUNTOYCOMA&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | &#60;NAME&#62; &#60;NAME&#62; &#60;RASIGNACION&#62; &#60;NAME&#62; &#60;RIZQPARENTESIS&#62;<**LISTA_DE_PARAMETROS**> &#60;RDERPARENTESIS&#62; &#60;RPUNTOYCOMA&#62; 
 
-TIPO  : TIPO_PRIMITIVO  { $$ = $1 }
-;
+<**TIPO_PRIMITIVO**> ::=  &#60;RINT&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RDOUBLE&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RSTRING_TIPO&#62;\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RBOOLEAN&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RCHAR&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RVOID&#62; 
 
-TIPO_PRIMITIVO :    RINT            { $$ =  Tipo.INT;}         
-               |    RDOUBLE         { $$ =  Tipo.DOUBLE;} 
-               |    RSTRING_TIPO    { $$ =  Tipo.STRING;}    
-               |    RBOOLEAN        { $$ =  Tipo.BOOLEAN;} 
-               |    RCHAR           { $$ =  Tipo.CHAR;} 
-               |    RVOID           { $$ =  Tipo.VOID;} 
-;
+<**IMPRESION**> ::= &#60;RPRINTLN&#62; &#60;RIZQPARENTESIS&#62;  <**LISTA_IMPRESION**> &#60;RDERPARENTESIS&#62; &#60;RPUNTOYCOMA&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | &#60;RPRINT&#62; &#60;RIZQPARENTESIS&#62; <**EXPRESION**> &#60;RDERPARENTESIS&#62; &#60;RPUNTOYCOMA&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | &#60;RPRINTLN&#62; &#60;RIZQPARENTESIS&#62; <**EXPRESION**> &#60;RDERPARENTESIS&#62; &#60;RPUNTOYCOMA&#62;
 
-IMPRESION       : RPRINTLN RIZQPARENTESIS LISTA_IMPRESION RDERPARENTESIS RPUNTOYCOMA
-                | RPRINT RIZQPARENTESIS EXPRESION RDERPARENTESIS RPUNTOYCOMA            { $$ = new Print($3, @1.first_line, @1.first_column); }
-                | RPRINTLN RIZQPARENTESIS EXPRESION RDERPARENTESIS RPUNTOYCOMA            { $$ = new Println($3, @1.first_line, @1.first_column); }
-;
+<**LISTA_IMPRESION**> ::= <**LISTA_IMPRESION**> &#60;RCOMA&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <**EXPRESION**>
 
-LISTA_IMPRESION : LISTA_IMPRESION RCOMA EXPRESION                  { $1.push($2); $$ = $1;}
-                | EXPRESION                                        { $$ = [$1]; }
-;
+<**LLAMADA**> ::=  &#60;NAME&#62; &#60;RIZQPARENTESIS&#62; <**LISTA_DE_PARAMETROS**> &#60;RDERPARENTESIS&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | &#60;NAME&#62; &#60;RIZQPARENTESIS&#62; &#60;RDERPARENTESIS&#62;
 
-LLAMADA         : NAME RIZQPARENTESIS LISTA_DE_PARAMETROS RDERPARENTESIS
-                | NAME RIZQPARENTESIS RDERPARENTESIS 
-;
+<**LISTA_DE_PARAMETROS**> ::= <**LISTA_DE_PARAMETROS**> &#60;RCOMA&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <**EXPRESION**>
 
-LISTA_DE_PARAMETROS : LISTA_DE_PARAMETROS RCOMA EXPRESION
-                    | EXPRESION
-; 
+<**NATIVAS**> ::= <**TIPO**> &#60;RPUNTO&#62; &#60;RPARSE&#62; &#60;RIZQPARENTESIS&#62; <**EXPRESION**> &#60;RDERPARENTESIS&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | &#60;RTOINT&#62; &#60;RIZQPARENTESIS&#62; <**EXPRESION**>  &#60;RDERPARENTESIS&#62; &#60; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | &#60;RTODOUBLE&#62; &#60;RIZQPARENTESIS&#62; <**EXPRESION**>  &#60;RDERPARENTESIS&#62; &#60; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | &#60;RSTRING_CAST&#62; &#60;RIZQPARENTESIS&#62; <**EXPRESION**>  &#60;RDERPARENTESIS&#62; &#60; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | &#60;RTYPEOF&#62; &#60;RIZQPARENTESIS&#62; <**EXPRESION**>  &#60;RDERPARENTESIS&#62; &#60; 
 
-NATIVAS          : TIPO RPUNTO RPARSE RIZQPARENTESIS EXPRESION RDERPARENTESIS
-                 | RTOINT RIZQPARENTESIS EXPRESION RDERPARENTESIS
-                 | RTODOUBLE RIZQPARENTESIS EXPRESION RDERPARENTESIS
-                 | RSTRING_CAST RIZQPARENTESIS EXPRESION RDERPARENTESIS
-                 | RTYPEOF RIZQPARENTESIS EXPRESION RDERPARENTESIS                 
-;
+<**CONDICIONAL_IF**> ::= &#60;RIF&#62; &#60;RIZQPARENTESIS&#62; <**EXPRESION**>  &#60;RDERPARENTESIS&#62; <**BLOQUE_INSTRUCCIONES**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | &#60;RIF&#62; &#60;RIZQPARENTESIS&#62; <**EXPRESION**>  &#60;RDERPARENTESIS&#62; <**BLOQUE_INSTRUCCIONES**>  &#60;RELSE&#62; <**CONDICIONAL_IF**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | &#60;RIF&#62; &#60;RIZQPARENTESIS&#62; <**EXPRESION**>  &#60;RDERPARENTESIS&#62; <**BLOQUE_INSTRUCCIONES**>  &#60;RELSE&#62; <**BLOQUE_INSTRUCCIONES**> 
 
-CONDICIONAL_IF  : RIF RIZQPARENTESIS EXPRESION RDERPARENTESIS BLOQUE_INSTRUCCIONES                             { $$ = new If($3, $5, [],[], @1.first_line, @1.first_column); }                                   
-                | RIF RIZQPARENTESIS EXPRESION RDERPARENTESIS BLOQUE_INSTRUCCIONES RELSE CONDICIONAL_IF        { $$ = new If($3, $5, [],[$7], @1.first_line, @1.first_column); }         
-                | RIF RIZQPARENTESIS EXPRESION RDERPARENTESIS BLOQUE_INSTRUCCIONES RELSE BLOQUE_INSTRUCCIONES  { $$ = new If($3, $5, $7,[], @1.first_line, @1.first_column); }
-;
+<**BLOQUE_INSTRUCCIONES**> ::=  &#60;RIZQLLAVE&#62; <**INSTRUCCIONES_INTERNAS**> &#60;RDERLLAVE&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**DECLARACION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**ASIGNACION**>\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**IMPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**LLAMADA**> &#60;RPUNTOYCOMA&#62; 
 
-BLOQUE_INSTRUCCIONES    : RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE                                            { $$ = $2 }                         
-                        | DECLARACION
-                        | ASIGNACION
-                        | IMPRESION
-                        | LLAMADA RPUNTOYCOMA
-; 
 
 SWITCH  : RSWITCH RIZQPARENTESIS EXPRESION RDERPARENTESIS RIZQLLAVE BLOQUE_SWITCH RDERLLAVE      { $$ = new Switch($3,$6,@1.first_line, @1.first_column); }
 ;
