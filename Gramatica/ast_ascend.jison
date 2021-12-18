@@ -316,7 +316,7 @@ DECLARAR_ASIGNACION : TIPO NAME RASIGNACION EXPRESION       { $$ = { node: newNo
 ;
 
 FUNCIONES : NAME NAME RIZQPARENTESIS RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE                            { $$ = { node: newNode(yy, yystate, $1, $2, $6.node) }}
-                | NAME NAME RIZQPARENTESIS LISTA_DE_ATRIBUTOSRDERPARENTESIS RIZQLLAVEINSTRUCCIONES_INTERNAS RDERLLAVE     { $$ = { node: newNode(yy, yystate, $1, $2, $4.node, $7.node) }}
+                | NAME NAME RIZQPARENTESIS LISTA_DE_ATRIBUTOS RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE     { $$ = { node: newNode(yy, yystate, $1, $2, $4.node, $7.node) }}
 ;
 
 TIPO_FUNCION_ATRIBUTO : RPOW     { $$ = { node: newNode(yy, yystate, $1) }} 
