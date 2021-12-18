@@ -12,15 +12,15 @@ ___
 <**START**> ::= <**INSTRUCCIONES**> <E O F>
 
 <**INSTRUCCIONES**> ::= <**INSTRUCCIONES**> <**INSTRUCCION**> \
-                    |   <**INSTRUCCION**> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    |   <**INSTRUCCION**> 
 
 <**INSTRUCCION**> ::= <**DECLARACION**> \
-                    |   <**ASIGNACION**> \
-                    |   <**IMPRESION**> \
-                    |   <**FUNCIONES**> \
-                    |   <**SWITCH**> \
-                    |   <**WHILE**> \
-                    |   <**DO_WHILE**> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                     |   <**ASIGNACION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                     |   <**IMPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                     |   <**FUNCIONES**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                     |   <**SWITCH**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                     |   <**WHILE**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                     |   <**DO_WHILE**> 
 
 <**DECLARACION**> ::= <**TIPO**> <NAME> <RASIGNACION> <**EXPRESION**> <RPUNTOYCOMA> \
                     | <**TIPO**> <**LISTA_DE_DECLARACION**> <RPUNTOYCOMA> \
