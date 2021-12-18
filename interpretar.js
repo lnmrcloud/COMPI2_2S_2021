@@ -5,9 +5,9 @@ function interpretar(){
     const entornoGlobal = new Entorno(null);
 
     salida.setValue('');
-    //ast.instrucciones.forEach((element) => {
-    //    element.interpretar(entornoGlobal,ast);
-    //})
+    ast.instrucciones.forEach((element) => {
+        element.interpretar(entornoGlobal,ast);
+    })
 }
 
 function graficar(){

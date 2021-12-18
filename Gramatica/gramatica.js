@@ -216,10 +216,10 @@ case 105: case 106:
  this.$ = new Primitivo(Number($$[$0]), this._$.first_line, this._$.first_column); 
 break;
 case 107:
- this.$ = new Primitivo(true,  this._$.first_line, this._$.first_column); 
+ this.$ = new Primitivo(true,this._$.first_line,this._$.first_column); 
 break;
 case 108:
- this.$ = new Primitivo(false, this._$.first_line, this._$.first_column); 
+ this.$ = new Primitivo(false,this._$.first_line,this._$.first_column); 
 break;
 case 109: case 110:
  this.$ = new Primitivo($$[$0], _$[$0].first_line, _$[$0].first_column); 

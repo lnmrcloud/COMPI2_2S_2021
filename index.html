@@ -74,11 +74,26 @@
 
 <script>var exports = {};</script>
 
+<script src="./Interfaces/Instruccion.js"></script>
+<script src="./Interfaces/Expresion.js"></script>
 <!-- AST -->
 <script src="./AST/AST.js"></script>
 <script src="./AST/Entorno.js"></script>
 <script src="./AST/Simbolo.js"></script>
 <script src="./AST/Tipo.js"></script>
+
+
+<!-- INSTRUCCIONES  -->
+
+<script src="./Instrucciones/Asignacion.js"></script>
+<script src="./Instrucciones/Break.js"></script>
+<script src="./Instrucciones/Case.js"></script>
+<script src="./Instrucciones/Continue.js"></script>
+<script src="./Instrucciones/Declaracion.js"></script>
+<script src="./Instrucciones/If.js"></script>
+<script src="./Instrucciones/Print.js"></script>
+<script src="./Instrucciones/Switch.js"></script>
+<script src="./Instrucciones/While.js"></script>
 
 <!-- EXPRESIONES -->
 <script src="./Expresiones/AccesoName.js"></script>
@@ -99,6 +114,7 @@
 <script src="./resources/mode/javascript/javascript.js"></script>
 <script src="./resources/mode/pascal/pascal.js"></script>
 <script src="./resources/js/main.js"></script>
+
 
 
 <script src="https://d3js.org/d3.v6.min.js"></script>
@@ -136,10 +152,10 @@
     salida.setSize(450, 500);
     
 
-    var txttraduc = CodeMirror.fromTextArea(document.getElementById("txtTraduccion"), {        
+    /*var txttraduc = CodeMirror.fromTextArea(document.getElementById("txtTraduccion"), {        
         mode: "javascript"        
     });    
-    txttraduc.setSize(450, 500);
+    txttraduc.setSize(450, 500); */
    
 
 </script>
