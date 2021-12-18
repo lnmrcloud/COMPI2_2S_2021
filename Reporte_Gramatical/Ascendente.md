@@ -9,7 +9,7 @@ ___
 
 ### GRAMATICA
 
-<**START**> ::= <**INSTRUCCIONES**> <E O F>
+<**START**> ::= <**INSTRUCCIONES**> <<EOF>>
 
 <**INSTRUCCIONES**> ::= <**INSTRUCCIONES**> <**INSTRUCCION**> \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                     |   <**INSTRUCCION**> 
