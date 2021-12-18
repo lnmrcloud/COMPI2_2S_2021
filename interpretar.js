@@ -17,6 +17,7 @@ function graficar(){
 
 }
 
+
 function newNode(yy, state, ...nodes) {
     const parent = getNonTerminal(yy, state);
     const children = [];
