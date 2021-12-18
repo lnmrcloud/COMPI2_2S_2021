@@ -12,26 +12,26 @@ ___
 <**START**> ::= <**INSTRUCCIONES**> <E O F>
 
 <**INSTRUCCIONES**> ::= <**INSTRUCCIONES**> <**INSTRUCCION**> \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    |   <**INSTRUCCION**> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                     |   <**INSTRUCCION**> 
 
 <**INSTRUCCION**> ::= <**DECLARACION**> \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                     |   <**ASIGNACION**> \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                     |   <**IMPRESION**> \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                     |   <**FUNCIONES**> \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                     |   <**SWITCH**> \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                     |   <**WHILE**> \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                     |   <**DO_WHILE**> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**ASIGNACION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**IMPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**FUNCIONES**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**SWITCH**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**WHILE**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**DO_WHILE**> 
 
 <**DECLARACION**> ::= <**TIPO**> <NAME> <RASIGNACION> <**EXPRESION**> <RPUNTOYCOMA> \
-                    | <**TIPO**> <**LISTA_DE_DECLARACION**> <RPUNTOYCOMA> \
-                    | <RSTRUCT> <NAME> <RIZQLLAVE> <**LISTA_DE_ATRIBUTOS**> <RDERLLAVE> <RPUNTOYCOMA> \
-                    | <**TIPO**> <RIZQCORCHETE> <RDERCORCHETE> <NAME> <RASIGNACION> <**CUERPO_ARRAY**> <RPUNTOYCOMA> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <**TIPO**> <**LISTA_DE_DECLARACION**> <RPUNTOYCOMA> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <RSTRUCT> <NAME> <RIZQLLAVE> <**LISTA_DE_ATRIBUTOS**> <RDERLLAVE> <RPUNTOYCOMA> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <**TIPO**> <RIZQCORCHETE> <RDERCORCHETE> <NAME> <RASIGNACION> <**CUERPO_ARRAY**> <RPUNTOYCOMA> 
 
 <**LISTA_DE_ATRIBUTOS**> ::= <**LISTA_DE_ATRIBUTOS**> <RCOMA> <**ATRIBUTO**> \
-                    | <**ATRIBUTO**>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <**ATRIBUTO**>
 
 <**ATRIBUTO**> ::= <**TIPO**> <NAME> \
-                    | <NAME> <NAME>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | <NAME> <NAME>
 
 LISTA_DE_DECLARACION  : LISTA_DE_DECLARACION RCOMA NAME      { $1.push($3); $$ = $1; }   
                       | NAME                                 { $$ = [$1] }   
