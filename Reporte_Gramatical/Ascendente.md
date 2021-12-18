@@ -9,30 +9,10 @@ ___
 
 ### GRAMATICA
 
-<dirección postal> ::= <nombre> <dirección> <apartado postal>
+<**START**> ::= <**INSTRUCCIONES**> <EOF>
 
-<span style="color:blue">some *blue* text</span>.
-
-<style>
-H1{color:Blue !important;}
-H2{color:DarkOrange !important;}
-p{color:Black !important;}
-</style>
-
-# Color Test Document
-
-## Second Heading
-
-This is a test to see how the colors work.
-
-
-/* Definición de la gramática */
-START : INSTRUCCIONES EOF    {return new AST($1,$1);} 
-;
-
-INSTRUCCIONES : INSTRUCCIONES INSTRUCCION         { $1.push($2); $$ = $1;}  
-              | INSTRUCCION                       { $$ = [$1]; }   
-;
+<**INSTRUCCIONES**> ::= <**INSTRUCCIONES**> <**INSTRUCCION**>
+                    |   <**INSTRUCCION**>
 
 INSTRUCCION   : DECLARACION          { $$ = $1 }                 
               | ASIGNACION           { $$ = $1 }          
