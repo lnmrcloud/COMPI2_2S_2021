@@ -29,7 +29,7 @@
                     <textarea id="txtXML" class="txtarea" name="txtXML" rows="30" cols="245"></textarea>
                     <br /><br />
                     <input type="file" name="inputfile" id="inputfile">
-                    <input type="button" class="button" value="Analizar" onclick="interpretar();" /> <br /><br>
+                     <!-- <input type="button" class="button" value="Analizar" onclick="interpretar();" /> <br /><br> -->
 
                 </div>
             </td>
@@ -54,19 +54,42 @@
         <tr>
             <td>
                 <!-- AREA DE TEXTO PARA REPORTES -->
-                <div id="ide3">
+                <div id="ide3">  
+                    <br>              
+                    <input type="button" value="Interpretar"  onclick="interpretar();" />
+                    <input type="button" value="Traducir"  />
+                    <input type="button" value="AST" onclick="graficar();"  />
+                    <input type="button" value="Tabla de Simbolos"  />
+                    <input type="button" value="Reporte Gramatical"  />
+                    <input type="button" value="Errores" onclick="mostrarErrores();">
+                    
                     <br>
-                    <a id="astLink">AST ASC</a>
-                    <br>
-                    <a id="tablaLink">Tabla Simbolos ASC</a>
-                    <br>
-                    <a id="tablaerror">Tabla Errores ASC</a>
-                    <br>
-                    <textarea id="textogramatical" class="txtarea" name="txtXML" rows="50" cols="245"></textarea>
-                </div>  
+                </div>
             </td>
         </tr>
+        <tr>
+            <td align="center" colspan="3">  
+                <!-- AREA DE TEXTO PARA RESULTADO -->                
+                <div id="ide3">                    
+                    <textarea id="console"  name="console" style="resize:none; overflow-y: scroll; "   rows="10" cols="140"></textarea>
+                </div> 
+                <hr>
+                <br> 
+            </td>            
+        </tr>
     </table>
+
+    <div id="errores" style="display:none">
+        <h2>Tabla de errores</h2>
+        <table id="tablaErrores" align="center" style="width:100%">
+            <tr>
+                <th>Tipo</th>
+                <th>Descripcion</th>
+                <th>Linea</th>
+                <th>Columna</th>
+            </tr>
+        </table>
+    </div>
 
 </body>
 
@@ -115,8 +138,6 @@
 <script src="./resources/mode/pascal/pascal.js"></script>
 <script src="./resources/js/main.js"></script>
 
-
-
 <script src="https://d3js.org/d3.v6.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
 <script src="./chart/chart.js"></script>
@@ -124,6 +145,10 @@
 
 <!-- INTERPRETACION  -->
 <script src="interpretar.js"></script> 
+
+<!-- ERRORES  -->
+<script src="./Error.js"></script>
+<script src="./ReporteErrores.js"></script>
 
 <script type="text/javascript">
     document.getElementById('inputfile')
@@ -144,12 +169,12 @@
         mode: "javascript"
         
     });    
-    entrada.setSize(450, 500);
+    entrada.setSize(1500, 500);
 
     var salida = CodeMirror.fromTextArea(document.getElementById("console"), {        
         mode: "javascript"        
     });    
-    salida.setSize(450, 500);
+    salida.setSize(1500, 100);
     
 
     /*var txttraduc = CodeMirror.fromTextArea(document.getElementById("txtTraduccion"), {        

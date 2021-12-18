@@ -1,7 +1,6 @@
 "use strict";
 exports.__esModule = true;
 exports.If = void 0;
-var Entorno_1 = require("../AST/Entorno");
 // print("hola mundo");
 var If = /** @class */ (function () {
     // meter listado de print print(a,b)

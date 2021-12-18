@@ -1,7 +1,6 @@
 "use strict";
 exports.__esModule = true;
 exports.While = void 0;
-var Entorno_1 = require("../AST/Entorno");
 var While = /** @class */ (function () {
     function While(condicion, lista_instrucciones, linea, columna) {
         this.condicion = condicion;

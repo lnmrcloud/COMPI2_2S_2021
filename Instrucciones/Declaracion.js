@@ -1,8 +1,6 @@
 "use strict";
 exports.__esModule = true;
 exports.Declaracion = void 0;
-var Simbolo_1 = require("../AST/Simbolo");
-var Tipo_1 = require("../AST/Tipo");
 // print("hola mundo");
 var Declaracion = /** @class */ (function () {
     // meter listado de print print(a,b)
@@ -24,7 +22,7 @@ var Declaracion = /** @class */ (function () {
                 if (_this.expresion !== null) {
                     if (_this.tipo === _this.expresion.getTipo(ent, arbol)) {
                         var valor = _this.expresion.getValorImplicito(ent, arbol);
-                        var simbolo = new Simbolo_1.Simbolo(_this.tipo, id, _this.linea, _this.columna, valor);
+                        var simbolo = new Simbolo(_this.tipo, id, _this.linea, _this.columna, valor);
                         ent.agregar(id, simbolo);
                     }
                     else {
@@ -32,7 +30,7 @@ var Declaracion = /** @class */ (function () {
                     }
                 }
                 else {
-                    var simbolo = new Simbolo_1.Simbolo(_this.tipo, id, _this.linea, _this.columna, _this.getValorDefault());
+                    var simbolo = new Simbolo(_this.tipo, id, _this.linea, _this.columna, _this.getValorDefault());
                     ent.agregar(id, simbolo);
                 }
             }
@@ -42,15 +40,15 @@ var Declaracion = /** @class */ (function () {
         });
     };
     Declaracion.prototype.getValorDefault = function () {
-        if (this.tipo === Tipo_1.Tipo.INT)
+        if (this.tipo === Tipo.INT)
             return 0;
-        else if (this.tipo === Tipo_1.Tipo.DOUBLE)
+        else if (this.tipo === Tipo.DOUBLE)
             return 0.0;
-        else if (this.tipo === Tipo_1.Tipo.BOOL)
+        else if (this.tipo === Tipo.BOOL)
             return false;
-        else if (this.tipo === Tipo_1.Tipo.STRING)
+        else if (this.tipo === Tipo.STRING)
             return "";
-        else if (this.tipo === Tipo_1.Tipo.CHAR)
+        else if (this.tipo === Tipo.CHAR)
             return "";
         else
             return null;

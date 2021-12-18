@@ -6,9 +6,47 @@ function interpretar(){
 
     salida.setValue('');
     ast.instrucciones.forEach((element) => {
-        element.interpretar(entornoGlobal,ast);
+        element.ejecutar(entornoGlobal,ast);
     })
 }
+
+function mostrarErrores(){
+
+    document.getElementById('errores').style.display = "block";
+    const tablaErrores = ReporteErrores.getInstance().getErrores();
+
+    let html = `<h4>Tabla de Errores</h4>
+    <table border=1 align="center" id="tablaSimbolos" style="width:100%">
+    <thead>
+    <tr bgcolor=darkred>
+    <th style="color:white">Tipo</th>
+    <th style="color:white"> Descripcion</th>
+    <th style="color:white">Fila</th>
+    <th style="color:white">Columna</th>
+    </tr>
+    </thead>
+    <tbody>
+    `;
+    console.log(tablaErrores);
+    var i = 0;
+    for (i = 0; i < tablaErrores.length; i++) {
+        let simbolo = tablaErrores[i];
+        html += `<tr>
+                <td>${simbolo.tipo}</td>
+                <td>${simbolo.descripcion}</td>
+                <td>${simbolo.linea}</td>
+                <td>${simbolo.columna}</td>
+                </tr>`
+            }
+    
+
+    html += `</tbody>
+    </table> </br></br><hr>`;
+
+    document.getElementById('errores').innerHTML = html;
+    
+}
+
 
 function graficar(){
     const content = entrada.getValue();
@@ -16,7 +54,6 @@ function graficar(){
     generateTree([result.node]);
 
 }
-
 
 function newNode(yy, state, ...nodes) {
     const parent = getNonTerminal(yy, state);
@@ -57,42 +94,5 @@ function newNode(yy, state, ...nodes) {
             }
         }
         return nonTerminal;
-    }
-
-    function mostrarErrores(){
-
-        document.getElementById('errores').style.display = "block";
-        const tablaErrores = ReporteErrores.getInstance().getErrores();
-    
-        let html = `<h4>Tabla de Errores</h4>
-        <table border=1 align="center" id="tablaSimbolos" style="width:100%">
-        <thead>
-        <tr bgcolor=darkred>
-        <th style="color:white">Tipo</th>
-        <th style="color:white"> Descripcion</th>
-        <th style="color:white">Fila</th>
-        <th style="color:white">Columna</th>
-        </tr>
-        </thead>
-        <tbody>
-        `;
-        console.log(tablaErrores);
-        var i = 0;
-        for (i = 0; i < tablaErrores.length; i++) {
-            let simbolo = tablaErrores[i];
-            html += `<tr>
-                    <td>${simbolo.tipo}</td>
-                    <td>${simbolo.descripcion}</td>
-                    <td>${simbolo.linea}</td>
-                    <td>${simbolo.columna}</td>
-                    </tr>`
-                }
-        
-    
-        html += `</tbody>
-        </table> </br></br><hr>`;
-    
-        document.getElementById('errores').innerHTML = html;
-        
     }
 }

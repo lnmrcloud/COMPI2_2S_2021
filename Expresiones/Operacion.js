@@ -1,9 +1,6 @@
 "use strict";
 exports.__esModule = true;
 exports.Operacion = exports.Operador = void 0;
-var Tipo_1 = require("../AST/Tipo");
-var Error_1 = require("../Error");
-var ReporteErrores_1 = require("../ReporteErrores");
 var Operador;
 (function (Operador) {
     Operador[Operador["CONCATENACION"] = 0] = "CONCATENACION";

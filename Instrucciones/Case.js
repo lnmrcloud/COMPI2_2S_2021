@@ -1,7 +1,7 @@
 "use strict";
 exports.__esModule = true;
 exports.Case = void 0;
-// print("hola mundo");
+
 var Case = /** @class */ (function () {
     // meter listado de print print(a,b)
     function Case(condicion, instrucciones, linea, columna, Default) {

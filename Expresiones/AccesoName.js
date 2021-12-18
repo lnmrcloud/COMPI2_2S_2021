@@ -1,7 +1,6 @@
 "use strict";
 exports.__esModule = true;
 exports.AccesoName = void 0;
-var Tipo_1 = require("../AST/Tipo");
 var AccesoName = /** @class */ (function () {
     function AccesoName(identificador, linea, columna) {
         this.linea = linea;
