@@ -11,29 +11,27 @@ ___
 
 <**START**> ::= <**INSTRUCCIONES**> <E O F>
 
-<**INSTRUCCIONES**> ::= <**INSTRUCCIONES**> <**INSTRUCCION**>
-                    |   <**INSTRUCCION**>
+<**INSTRUCCIONES**> ::= <**INSTRUCCIONES**> <**INSTRUCCION**> \
+                    |   <**INSTRUCCION**> 
 
-<**INSTRUCCION**> ::= <**DECLARACION**>
-                    |   <**ASIGNACION**>
-                    |   <**IMPRESION**>
-                    |   <**FUNCIONES**>
-                    |   <**SWITCH**>
-                    |   <**WHILE**>
-                    |   <**DO_WHILE**>
+<**INSTRUCCION**> ::= <**DECLARACION**> \
+                    |   <**ASIGNACION**> \
+                    |   <**IMPRESION**> \
+                    |   <**FUNCIONES**> \
+                    |   <**SWITCH**> \
+                    |   <**WHILE**> \
+                    |   <**DO_WHILE**> 
 
-<**DECLARACION**> ::= <**TIPO**> <NAME> <RASIGNACION> <**EXPRESION**> <RPUNTOYCOMA>
-                    | <**TIPO**> <**LISTA_DE_DECLARACION**> <RPUNTOYCOMA>
-                    | <RSTRUCT> <NAME> <RIZQLLAVE> <**LISTA_DE_ATRIBUTOS**> <RDERLLAVE> <RPUNTOYCOMA>
-                    | <**TIPO**> <RIZQCORCHETE> <RDERCORCHETE> <NAME> <RASIGNACION> <**CUERPO_ARRAY**> <RPUNTOYCOMA>
+<**DECLARACION**> ::= <**TIPO**> <NAME> <RASIGNACION> <**EXPRESION**> <RPUNTOYCOMA> \
+                    | <**TIPO**> <**LISTA_DE_DECLARACION**> <RPUNTOYCOMA> \
+                    | <RSTRUCT> <NAME> <RIZQLLAVE> <**LISTA_DE_ATRIBUTOS**> <RDERLLAVE> <RPUNTOYCOMA> \
+                    | <**TIPO**> <RIZQCORCHETE> <RDERCORCHETE> <NAME> <RASIGNACION> <**CUERPO_ARRAY**> <RPUNTOYCOMA> 
 
-LISTA_DE_ATRIBUTOS  : LISTA_DE_ATRIBUTOS RCOMA ATRIBUTO     { $1.push($3); $$ = $1; }
-                    | ATRIBUTO                              { $$ = [$1] }
-;
+<**LISTA_DE_ATRIBUTOS**> ::= <**LISTA_DE_ATRIBUTOS**> <RCOMA> <**ATRIBUTO**> \
+                    | <**ATRIBUTO**>
 
-ATRIBUTO : TIPO NAME    { $$ = new Simbolo($1, $2, @1.first_line, @1.first_column); } 
-         | NAME NAME
-;
+<**ATRIBUTO**> ::= <**TIPO**> <NAME> \
+                    | <NAME> <NAME>
 
 LISTA_DE_DECLARACION  : LISTA_DE_DECLARACION RCOMA NAME      { $1.push($3); $$ = $1; }   
                       | NAME                                 { $$ = [$1] }   
