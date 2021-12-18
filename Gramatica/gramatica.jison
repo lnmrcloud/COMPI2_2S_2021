@@ -177,7 +177,7 @@ PALABRAS RESERVADAS DE QUETZAL -----------------------------------------------
 
 
 <<EOF>>                 return 'EOF';
-.                           {console.log("Lexico", yytext,  yylloc.first_line, yylloc.first_column)}
+.                       {console.log("Lexico", yytext,  yylloc.first_line, yylloc.first_column)}
 
 /lex
 
@@ -205,7 +205,7 @@ PALABRAS RESERVADAS DE QUETZAL -----------------------------------------------
 %%
 
 /* Definición de la gramática */
-START : INSTRUCCIONES EOF    {return new AST($1);}
+START : INSTRUCCIONES EOF    {return new AST($1,$1);} 
 ;
 
 INSTRUCCIONES : INSTRUCCIONES INSTRUCCION         { $1.push($2); $$ = $1;}  
@@ -214,11 +214,12 @@ INSTRUCCIONES : INSTRUCCIONES INSTRUCCION         { $1.push($2); $$ = $1;}
 
 INSTRUCCION   : DECLARACION          { $$ = $1 }                 
               | ASIGNACION           { $$ = $1 }          
-              | IMPREESION           { $$ = $1 }             
-              | FUNCIONES
+              | IMPRESION            { $$ = $1 }             
+              | FUNCIONES            { $$ = $1 }
               | CONDICIONAL_IF       { $$ = $1 }    
               | SWITCH               { $$ = $1 }   
-              | WHILE                { $$ = $1 }   
+              | WHILE                { $$ = $1 } 
+              | DO_WHILE             { $$ = $1 } 
 ;
 
 DECLARACION : TIPO NAME RASIGNACION EXPRESION RPUNTOYCOMA                             { $$ = new Declaracion([$2],$1, @1.first_line, @1.first_column,$4); }    
@@ -227,15 +228,15 @@ DECLARACION : TIPO NAME RASIGNACION EXPRESION RPUNTOYCOMA                       
             | TIPO RIZQCORCHETE RDERCORCHETE NAME RASIGNACION CUERPO_ARRAY RPUNTOYCOMA
 ;
 
-LISTA_DE_ATRIBUTOS  : LISTA_DE_ATRIBUTOS RCOMA ATRIBUTO
-                    | ATRIBUTO
+LISTA_DE_ATRIBUTOS  : LISTA_DE_ATRIBUTOS RCOMA ATRIBUTO     { $1.push($3); $$ = $1; }
+                    | ATRIBUTO                              { $$ = [$1] }
 ;
 
-ATRIBUTO : TIPO NAME
+ATRIBUTO : TIPO NAME    { $$ = new Simbolo($1, $2, @1.first_line, @1.first_column); } 
          | NAME NAME
 ;
 
-LISTA_DE_DECLARACION  : LISTA_DE_DECLARACIONES RCOMA NAME    { $1.push($3); $$ = $1; }   
+LISTA_DE_DECLARACION  : LISTA_DE_DECLARACION RCOMA NAME      { $1.push($3); $$ = $1; }   
                       | NAME                                 { $$ = [$1] }   
 ;
 
@@ -250,15 +251,16 @@ TIPO  : TIPO_PRIMITIVO  { $$ = $1 }
 ;
 
 TIPO_PRIMITIVO :    RINT            { $$ =  Tipo.INT;}         
-               |    RDOUBLE         { $$ =  Tipo.INT;} 
+               |    RDOUBLE         { $$ =  Tipo.DOUBLE;} 
                |    RSTRING_TIPO    { $$ =  Tipo.STRING;}    
-               |    RBOOLEAN        { $$ =  Tipo.BOOL;} 
+               |    RBOOLEAN        { $$ =  Tipo.BOOLEAN;} 
                |    RCHAR           { $$ =  Tipo.CHAR;} 
                |    RVOID           { $$ =  Tipo.VOID;} 
 ;
 
-IMPRESION : RPRINTLN RIZQPARENTESIS LISTA_IMPRESION RDERPARENTESIS RPUNTOYCOMA
+IMPRESION       : RPRINTLN RIZQPARENTESIS LISTA_IMPRESION RDERPARENTESIS RPUNTOYCOMA
                 | RPRINT RIZQPARENTESIS EXPRESION RDERPARENTESIS RPUNTOYCOMA            { $$ = new Print($3, @1.first_line, @1.first_column); }
+                | RPRINTLN RIZQPARENTESIS EXPRESION RDERPARENTESIS RPUNTOYCOMA            { $$ = new Println($3, @1.first_line, @1.first_column); }
 ;
 
 LISTA_IMPRESION : LISTA_IMPRESION RCOMA EXPRESION                  { $1.push($2); $$ = $1;}
@@ -300,13 +302,13 @@ BLOQUE_SWITCH   : BLOQUE_SWITCH ESTRUCTURA_CASE    { $1.push($2); $$ = $1;}
 ;
 
 ESTRUCTURA_CASE : RCASE EXPRESION RDOSPUNTOS INSTRUCCIONES_INTERNAS         { $$ = new Case($2,$4,@1.first_line, @1.first_column); }
-                | RDEFAULT EXPRESION RDOSPUNTOS INSTRUCCIONES_INTERNAS      { $$ = new Case([],$3,@1.first_line, @1.first_column,true); }
+                | RDEFAULT RDOSPUNTOS INSTRUCCIONES_INTERNAS      { $$ = new Case([],$3,@1.first_line, @1.first_column,true); }
 ;
 
 WHILE  : RWHILE RIZQPARENTESIS EXPRESION RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE    { $$ = new While($3,$6,@1.first_line, @1.first_colum); }
 ;
 
-DO_WHILE  : RDO RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE RWHILE RIZQPARENTESIS EXPRESION RDERPARENTESIS RPUNTOYCOMA  
+DO_WHILE  : RDO RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE RWHILE RIZQPARENTESIS EXPRESION RDERPARENTESIS RPUNTOYCOMA  { $$ = new DoWhile($7,$3,@1.first_line, @1.first_colum); }
 ;
 
 FOR : RFOR RIZQPARENTESIS DECLARAR_ASIGNACION RPUNTOYCOMA EXPRESION RPUNTOYCOMA  DECLARAR_ASIGNACION RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE 
@@ -317,11 +319,11 @@ DECLARAR_ASIGNACION : TIPO NAME RASIGNACION EXPRESION
                     | EXPRESION
 ;
 
-FUNCIONES : NAME NAME RIZQPARENTESIS RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE 
-                | NAME NAME RIZQPARENTESIS LISTA_DE_ATRIBUTOSRDERPARENTESIS RIZQLLAVEINSTRUCCIONES_INTERNAS RDERLLAVE 
+FUNCIONES : TIPO NAME RIZQPARENTESIS RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE                         { $$ = new Funcion($1,$2,[],$6,@1.first_line, @1.first_column); }
+                | TIPO NAME RIZQPARENTESIS LISTA_DE_ATRIBUTOS RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE  { $$ = new Funcion($1,$2,$4,$7,@1.first_line, @1.first_column); }
 ;
 
-TIPO_FUNCION_ATRIBUTO : RPOW
+TIPO_FUNCION_ARITMETICA : RPOW
                       | RSQRT
                       | RSIN
                       | RCOS
@@ -335,17 +337,17 @@ INSTRUCCIONES_INTERNAS : INSTRUCCIONES_INTERNAS INSTRUCCION_INTERNA        { $1.
                      | INSTRUCCION_INTERNA                                 { $$ = [$1]; }
 ;
 
-INSTRUCCION_INTERNA      : DECLARACION                      { $$ = $1 }     
+INSTRUCCION_INTERNA     : DECLARACION                       { $$ = $1 }     
                         | ASIGNACION                        { $$ = $1 }
                         | IMPRESION                         { $$ = $1 }           
                         | LLAMADA RPUNTOYCOMA
                         | CONDICIONAL_IF                    { $$ = $1 }                  
                         | SWITCH                            { $$ = $1 }
-                        | WHILE
-                        | DO_WHILE
+                        | WHILE                             { $$ = $1 }
+                        | DO_WHILE                          { $$ = $1 }
                         | FOR
-                        | RRETURN RPUNTOYCOMA
-                        | RRETURN EXPRESION RPUNTOYCOMA
+                        | RRETURN RPUNTOYCOMA               { $$ = new Return([],@1.first_line, @1.first_column); }
+                        | RRETURN EXPRESION RPUNTOYCOMA     { $$ = new Return($2,@1.first_line, @1.first_column); }
                         | RBREAK RPUNTOYCOMA                { $$ = new Break(@1.first_line, @1.first_column); }
                         | EXPRESION RINCREMENTORPUNTOYCOMA
                         | EXPRESION RDECREMENTORPUNTOYCOMA
@@ -368,7 +370,7 @@ EXPRESION : RRESTA EXPRESION %prec UMENOS	                  { $$ = new Operacion
           | EXPRESION RAND EXPRESION                        { $$ = new Operacion($1,$3,Operador.AND, @1.first_line, @1.first_column); }
           | EXPRESION ROR EXPRESION                         { $$ = new Operacion($1,$3,Operador.OR, @1.first_line, @1.first_column); }
           | RNOT EXPRESION	   	                                    { $$ = new Operacion($2,$2,Operador.NOT, @1.first_line, @1.first_column); }
-          | NAME                                                                          { $$ = new AccesoVariable($1, @1.first_line, @1.first_column); }
+          | NAME                                                                          { $$ = new AccesoName($1, @1.first_line, @1.first_column); }
           | ENTERO		                                                                    { $$ = new Primitivo(Number($1), this._$.first_line, this._$.first_column); }		
           | DECIMAL				                                                                { $$ = new Primitivo(Number($1), this._$.first_line, this._$.first_column); }
           | RTRUE				                                                                  { $$ = new Primitivo(true,this._$.first_line,this._$.first_column); }
@@ -377,7 +379,7 @@ EXPRESION : RRESTA EXPRESION %prec UMENOS	                  { $$ = new Operacion
           | CARACTER                                                                      { $$ = new Primitivo($1, @1.first_line, @1.first_column); }
           | RNULL                                                                         { $$ = new Primitivo(null, @1.first_line, @1.first_column); }
           | NAME RPUNTO NAME RIZQPARENTESIS RDERPARENTESIS
-          | NAME RPUNTO NAME RIZQPARENTESIS LISTA_DE_PARAMETROSRDERPARENTESIS
+          | NAME RPUNTO NAME RIZQPARENTESIS LISTA_DE_PARAMETROS RDERPARENTESIS
           | CADENA RPUNTO NAME RIZQPARENTESIS RDERPARENTESIS
           | CADENA RPUNTO NAME RIZQPARENTESIS LISTA_DE_PARAMETROS RDERPARENTESIS
           | EXPRESION RTERNARIO EXPRESION RDOSPUNTOS EXPRESION

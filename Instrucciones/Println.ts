@@ -3,7 +3,7 @@ import { Entorno } from "../AST/Entorno";
 import { Expresion } from "../Interfaces/Expresion";
 import { Instruccion } from "../Interfaces/Instruccion";
 
-export class Print implements Instruccion{
+export class Println implements Instruccion{
     linea: number;
     columna: number;
     public expresion:Expresion;

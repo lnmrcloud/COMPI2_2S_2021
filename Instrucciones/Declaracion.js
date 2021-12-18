@@ -20,6 +20,7 @@ var Declaracion = /** @class */ (function () {
         this.identificadores.forEach(function (id) {
             if (!ent.existe(id)) {
                 if (_this.expresion !== null) {
+                    //console.error(this.expresion.getTipo(ent, arbol));
                     if (_this.tipo === _this.expresion.getTipo(ent, arbol)) {
                         var valor = _this.expresion.getValorImplicito(ent, arbol);
                         var simbolo = new Simbolo(_this.tipo, id, _this.linea, _this.columna, valor);

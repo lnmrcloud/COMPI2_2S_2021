@@ -1,13 +1,27 @@
+let consola_resultado ="";
+
 function interpretar(){
     
     const content = entrada.getValue();
     const ast = gramatica.parse(content);    
     const entornoGlobal = new Entorno(null);
 
-    salida.setValue('');
+    salida.setValue(""); // LIMPIAMOS CONSOLA
+
+    const noMain = ast.ejecutarMain();
+
+    if(noMain == null){
+        console.log("no existe main");
+    }else {
+        ast.funciones[noMain].ejecutar(entornoGlobal,ast);
+    }
+
     ast.instrucciones.forEach((element) => {
         element.ejecutar(entornoGlobal,ast);
     })
+
+    salida.setValue(consola_resultado);
+
 }
 
 function mostrarErrores(){
@@ -95,4 +109,12 @@ function newNode(yy, state, ...nodes) {
         }
         return nonTerminal;
     }
+}
+
+function agrupar_consola_sin_salto(resultado_print){
+    consola_resultado = consola_resultado + resultado_print;
+}
+
+function agrupar_consola_con_salto(resultado_print){
+    consola_resultado = consola_resultado + '\n' + resultado_print;
 }

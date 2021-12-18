@@ -1,20 +1,20 @@
 "use strict";
 exports.__esModule = true;
-exports.Print = void 0;
+exports.Println = void 0;
 // print("hola mundo");
-var Print = /** @class */ (function () {
+var Println = /** @class */ (function () {
     // meter listado de print print(a,b)
-    function Print(exp, linea, columna, saltoLinea) {
+    function Println(exp, linea, columna, saltoLinea) {
         if (saltoLinea === void 0) { saltoLinea = false; }
         this.expresion = exp;
         this.linea = linea;
         this.columna = columna;
         this.salto = saltoLinea;
     }
-    Print.prototype.traducir = function (ent, arbol) {
+    Println.prototype.traducir = function (ent, arbol) {
         throw new Error("Method not implemented.");
     };
-    Print.prototype.ejecutar = function (ent, arbol) {
+    Println.prototype.ejecutar = function (ent, arbol) {
         var valor = this.expresion.getValorImplicito(ent, arbol);
         var actual;
         var inputValue = document.getElementById("console").value;
@@ -22,7 +22,7 @@ var Print = /** @class */ (function () {
         if (valor !== null) {
             if (!this.salto) {
 
-                agrupar_consola_sin_salto(valor);
+                agrupar_consola_con_salto(valor);
 
                 //document.getElementById("console").value = inputValue + '\n' + valor;
                 console.log('>', valor);
@@ -35,6 +35,6 @@ var Print = /** @class */ (function () {
             console.log('>> Error, no se pueden imprimir valores nulos');
         }
     };
-    return Print;
+    return Println;
 }());
-exports.Print = Print;
+exports.Println = Println;

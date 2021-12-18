@@ -36,21 +36,21 @@ var Operacion = /** @class */ (function () {
     Operacion.prototype.getTipo = function (ent, arbol) {
         var valor = this.getValorImplicito(ent, arbol);
         if (typeof (valor) === 'boolean') {
-            return Tipo_1.Tipo.BOOL;
+            return Tipo.BOOL;
         }
         else if (typeof (valor) === 'string') {
-            return Tipo_1.Tipo.STRING;
+            return Tipo.STRING;
         }
         else if (typeof (valor) === 'number') {
             if (this.isInt(Number(valor))) {
-                return Tipo_1.Tipo.INT;
+                return Tipo.INT;
             }
-            return Tipo_1.Tipo.DOUBLE;
+            return Tipo.DOUBLE;
         }
         else if (valor === null) {
-            return Tipo_1.Tipo.NULL;
+            return Tipo.NULL;
         }
-        return Tipo_1.Tipo.VOID;
+        return Tipo.VOID;
     };
     //Metodo que solo se utiliza para determinar los tipos especficios de datos permitidos
     Operacion.prototype.getTipoDato = function (valor) {
@@ -84,8 +84,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos realizando una concatenacion");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos realizando una concatenacion", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos realizando una concatenacion", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -104,15 +104,15 @@ var Operacion = /** @class */ (function () {
                     }
                     else {
                         console.log("Error de tipos de datos no permitidos realizando una repeticion");
-                        var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos realizando una repeticion", 1, 1);
-                        var re = ReporteErrores_1.ReporteErrores.getInstance();
+                        var prueba = new Error("Semantico", "Error de tipos de datos no permitidos realizando una repeticion", 1, 1);
+                        var re = ReporteErrores.getInstance();
                         re.pushError(prueba);
                     }
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos realizando una repeticion");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos realizando una repeticion", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos realizando una repeticion", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -148,8 +148,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos realizando una suma");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos realizando una suma", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos realizando una suma", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -185,8 +185,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos realizando una resta");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos realizando una resta", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos realizando una resta", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -222,8 +222,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos realizando una multiplicacion.");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos realizando una multiplicacion", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos realizando una multiplicacion", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -259,8 +259,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos realizando una division.");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos realizando una division", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos realizando una division", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -296,8 +296,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos realizando una modulo.");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos realizando una modulo", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos realizando una modulo", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -309,8 +309,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos para la expresion relacional >");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos para la expresion relacional >", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos para la expresion relacional >", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -322,8 +322,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos para la expresion relacional >=");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos para la expresion relacional >=", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos para la expresion relacional >=", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -335,8 +335,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos para la expresion relacional <");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos para la expresion relacional <", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos para la expresion relacional <", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -348,8 +348,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos para la expresion relacional <=");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos para la expresion relacional <=", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos para la expresion relacional <=", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -361,8 +361,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos para la expresion relacional ==");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos para la expresion relacional ==", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos para la expresion relacional ==", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -374,8 +374,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos para la expresion relacional !=");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos para la expresion relacional !=", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos para la expresion relacional !=", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -387,8 +387,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos realizando un AND");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos realizando un AND", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos realizando un AND", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -400,8 +400,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos realizando un OR");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos realizando un OR", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos realizando un OR", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -415,8 +415,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos realizando una operación unaria");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos realizando una operación unaria", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos realizando una operación unaria", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }
@@ -428,8 +428,8 @@ var Operacion = /** @class */ (function () {
                 }
                 else {
                     console.log("Error de tipos de datos no permitidos realizando un not");
-                    var prueba = new Error_1.Error("Semantico", "Error de tipos de datos no permitidos realizando un not", 1, 1);
-                    var re = ReporteErrores_1.ReporteErrores.getInstance();
+                    var prueba = new Error("Semantico", "Error de tipos de datos no permitidos realizando un not", 1, 1);
+                    var re = ReporteErrores.getInstance();
                     re.pushError(prueba);
                     return null;
                 }

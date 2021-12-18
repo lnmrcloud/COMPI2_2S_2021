@@ -2,7 +2,7 @@ export enum Tipo {
     STRING,
     INT,
     DOUBLE,
-    BOOL,
+    BOOLEAN,
     CHAR,
     VOID,
     STRUCT,

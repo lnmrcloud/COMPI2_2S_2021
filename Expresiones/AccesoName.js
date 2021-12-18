@@ -18,7 +18,7 @@ var AccesoName = /** @class */ (function () {
         else {
             console.error("error semantico no existe la variable", this.linea, "columna", this.columna);
         }
-        return Tipo_1.Tipo.NULL;
+        return Tipo.Tipo.NULL;
     };
     AccesoName.prototype.getValorImplicito = function (ent, arbol) {
         if (ent.existe(this.identificador)) {
