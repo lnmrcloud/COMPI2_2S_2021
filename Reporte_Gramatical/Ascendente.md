@@ -9,26 +9,23 @@ ___
 
 ### GRAMATICA
 
-<**START**> ::= <**INSTRUCCIONES**> <EOF>
+<**START**> ::= <**INSTRUCCIONES**> <E O F>
 
 <**INSTRUCCIONES**> ::= <**INSTRUCCIONES**> <**INSTRUCCION**>
                     |   <**INSTRUCCION**>
 
-INSTRUCCION   : DECLARACION          { $$ = $1 }                 
-              | ASIGNACION           { $$ = $1 }          
-              | IMPRESION            { $$ = $1 }             
-              | FUNCIONES            { $$ = $1 }
-              | CONDICIONAL_IF       { $$ = $1 }    
-              | SWITCH               { $$ = $1 }   
-              | WHILE                { $$ = $1 } 
-              | DO_WHILE             { $$ = $1 } 
-;
+<**INSTRUCCION**> ::= <**DECLARACION**>
+                    |   <**ASIGNACION**>
+                    |   <**IMPRESION**>
+                    |   <**FUNCIONES**>
+                    |   <**SWITCH**>
+                    |   <**WHILE**>
+                    |   <**DO_WHILE**>
 
-DECLARACION : TIPO NAME RASIGNACION EXPRESION RPUNTOYCOMA                             { $$ = new Declaracion([$2],$1, @1.first_line, @1.first_column,$4); }    
-            | TIPO LISTA_DE_DECLARACION RPUNTOYCOMA                                   { $$ = new Declaracion($2, $1, @1.first_line, @1.first_column); }
-            | RSTRUCT NAME RIZQLLAVE LISTA_DE_ATRIBUTOS RDERLLAVE RPUNTOYCOMA
-            | TIPO RIZQCORCHETE RDERCORCHETE NAME RASIGNACION CUERPO_ARRAY RPUNTOYCOMA
-;
+<**DECLARACION**> ::= <**TIPO**> <NAME> <RASIGNACION> <**EXPRESION**> <RPUNTOYCOMA>
+                    | <**TIPO**> <**LISTA_DE_DECLARACION**> <RPUNTOYCOMA>
+                    | <RSTRUCT> <NAME> <RIZQLLAVE> <**LISTA_DE_ATRIBUTOS**> <RDERLLAVE> <RPUNTOYCOMA>
+                    | <**TIPO**> <RIZQCORCHETE> <RDERCORCHETE> <NAME> <RASIGNACION> <**CUERPO_ARRAY**> <RPUNTOYCOMA>
 
 LISTA_DE_ATRIBUTOS  : LISTA_DE_ATRIBUTOS RCOMA ATRIBUTO     { $1.push($3); $$ = $1; }
                     | ATRIBUTO                              { $$ = [$1] }
