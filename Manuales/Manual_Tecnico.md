@@ -24,5 +24,18 @@ ___
 
 ## GRAMATICAS
 
-Detalle de gramatica de proyecto ascendente [Gramatica Ascendente](https://github.com/lnmrcloud/COMPI2_2S_2021/blob/main/Reporte_Gramatical/Ascendente.md).
+Detalle de gramatica de proyecto ascendente [Gramatica Ascendente](https://github.com/lnmrcloud/COMPI2_2S_2021/blob/main/Reporte_Gramatical/Ascendente.md). \
 Detalle de gramatica de proyecto ascendente [Gramatica Descendente](https://github.com/lnmrcloud/COMPI2_2S_2021/blob/main/Reporte_Gramatical/Descendente.md).
+
+## TRADUCCION
+
+Reglas de Traduccion \
+
++ Asignacion: **X** = y **op** Z
++ Operacion unaria: **X** = **op** Z
++ Copia : **X** =  Z
++ Salto incondicional: **goto** L
++ Salto condicional: if **X** goto **L**
++ Llamadas: param **X** = call p,n;
++ Copia indexada: **X** = y[i]
++ Asignacion direccional: x = &y
