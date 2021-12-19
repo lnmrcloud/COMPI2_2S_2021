@@ -1,0 +1,28 @@
+### Universidad de San Carlos de Guatemala.
+### Compiladores 2
+#### Vacacionse Diciembre 2021
+___
+
+### Manual de Tecnico
+#### Proyecto 1
+
+## HERRAMIENTAS UTILIZADAS
+
+- Interfaz Grafica, Lenguaje de Etiquetas HTML
+- BackEnd, Javascript
+- Analizador Lexico, Lex Jison
+- Analizador Sintactico, Jison
+- Analizador Semantico, Javascript
+- Graficas Arbol AST, d3.js 
+- Librerias Anexas, Code Mirror .css
+- Librerias Anexas, Bootstrap .css
+
+## LENGUAJES ASOCIADOS
+
+- Entrada, Quetzal (Java y C++)
+- Salida, 3DC
+
+## GRAMATICAS
+
+Detalle de gramatica de proyecto ascendente [Gramatica Ascendente](https://github.com/lnmrcloud/COMPI2_2S_2021/blob/main/Reporte_Gramatical/Ascendente.md).
+Detalle de gramatica de proyecto ascendente [Gramatica Descendente](https://github.com/lnmrcloud/COMPI2_2S_2021/blob/main/Reporte_Gramatical/Descendente.md).
