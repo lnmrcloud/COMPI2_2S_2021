@@ -77,102 +77,90 @@ ___
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**IMPRESION**> \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**LLAMADA**> &#60;RPUNTOYCOMA&#62; 
 
+<**SWITCH**> ::= &#60;RSWITCH&#62; &#60;RIZQPARENTESIS&#62; <**EXPRESION**>  &#60;RDERPARENTESIS&#62; &#60;RIZQLLAVE&#62; <**BLOQUE_SWITCH**>  &#60;RDERLLAVE&#62;
 
-SWITCH  : RSWITCH RIZQPARENTESIS EXPRESION RDERPARENTESIS RIZQLLAVE BLOQUE_SWITCH RDERLLAVE      { $$ = new Switch($3,$6,@1.first_line, @1.first_column); }
-;
+<**BLOQUE_SWITCH**> ::= <**BLOQUE_SWITCH**> <**ESTRUCTURA_CASE**>  \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**ESTRUCTURA_CASE**> 
 
-BLOQUE_SWITCH   : BLOQUE_SWITCH ESTRUCTURA_CASE    { $1.push($2); $$ = $1;}
-                | ESTRUCTURA_CASE                  { $$ = [$1]; }
-;
+<**ESTRUCTURA_CASE**> ::= &#60;RCASE&#62; <**EXPRESION**>  &#60;RDOSPUNTOS &#62; <**INSTRUCCIONES_INTERNAS**>  \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |  &#60;RDEFAULT&#62; &#60;RDOSPUNTOS&#62; <**INSTRUCCIONES_INTERNAS**>  
 
-ESTRUCTURA_CASE : RCASE EXPRESION RDOSPUNTOS INSTRUCCIONES_INTERNAS         { $$ = new Case($2,$4,@1.first_line, @1.first_column); }
-                | RDEFAULT RDOSPUNTOS INSTRUCCIONES_INTERNAS      { $$ = new Case([],$3,@1.first_line, @1.first_column,true); }
-;
+<**WHILE**> ::= &#60;RWHILE&#62; &#60;RIZQPARENTESIS&#62; <**EXPRESION**>  &#60;RDERPARENTESIS&#62; &#60;RIZQLLAVE&#62; <**INSTRUCCIONES_INTERNAS**>  &#60;RDERLLAVE&#62;
 
-WHILE  : RWHILE RIZQPARENTESIS EXPRESION RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE    { $$ = new While($3,$6,@1.first_line, @1.first_colum); }
-;
+<**DO_WHILE**> ::= &#60;RDO&#62; &#60;RIZQLLAVE&#62; <**INSTRUCCIONES_INTERNAS**>  &#60;RDERLLAVE&#62; &#60;RWHILE&#62; &#60;RIZQPARENTESIS&#62; <**EXPRESION**>  &#60;RDERPARENTESIS&#62;  &#60;RPUNTOYCOMA&#62; 
 
-DO_WHILE  : RDO RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE RWHILE RIZQPARENTESIS EXPRESION RDERPARENTESIS RPUNTOYCOMA  { $$ = new DoWhile($7,$3,@1.first_line, @1.first_colum); }
-;
+<**FOR**> ::= &#60;RFOR&#62; &#60;RIZQPARENTESIS&#62; <**DECLARAR_ASIGNACION**>  &#60;RPUNTOYCOMA&#62; <**EXPRESION**>  &#60;RPUNTOYCOMA&#62; <**DECLARAR_ASIGNACION**> &#60;RDERPARENTESIS&#62; &#60;RIZQLLAVE&#62; <**INSTRUCCIONES_INTERNAS**> &#60;RDERLLAVE&#62; 
 
-FOR : RFOR RIZQPARENTESIS DECLARAR_ASIGNACION RPUNTOYCOMA EXPRESION RPUNTOYCOMA  DECLARAR_ASIGNACION RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE 
-;
+<**DECLARAR_ASIGNACION**> ::= <**TIPO**> &#60;NAME&#62; &#60;RASIGNACION&#62; <**EXPRESION**>  \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;NAME&#62; &#60;RASIGNACION&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> 
 
-DECLARAR_ASIGNACION : TIPO NAME RASIGNACION EXPRESION
-                    | NAME RASIGNACION EXPRESION
-                    | EXPRESION
-;
+<**FUNCIONES**> ::= <**TIPO**> &#60;NAME&#62; &#60;RIZQPARENTESIS&#62; &#60;RDERPARENTESIS&#62; &#60;RIZQLLAVE&#62; <**INSTRUCCIONES_INTERNAS**> &#60;RDERLLAVE&#62;  \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**TIPO**> &#60;NAME&#62; &#60;RIZQPARENTESIS&#62; <**LISTA_DE_ATRIBUTOS**> &#60;RDERPARENTESIS&#62; &#60;RIZQLLAVE&#62; <**INSTRUCCIONES_INTERNAS**> &#60;RDERLLAVE&#62;
 
-FUNCIONES : TIPO NAME RIZQPARENTESIS RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE                         { $$ = new Funcion($1,$2,[],$6,@1.first_line, @1.first_column); }
-                | TIPO NAME RIZQPARENTESIS LISTA_DE_ATRIBUTOS RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE  { $$ = new Funcion($1,$2,$4,$7,@1.first_line, @1.first_column); }
-;
+<**TIPO_FUNCION_ARITMETICA**> ::=  &#60;RPOW&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RSQRT&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RSIN&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RCOS&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RTAN&#62; 
 
-TIPO_FUNCION_ARITMETICA : RPOW
-                      | RSQRT
-                      | RSIN
-                      | RCOS
-                      | RTAN
-;
+<**FUNCION_ARITMETICA**> ::= <**TIPO_FUNCION_ARITMETICA**> &#60;RIZQPARENTESIS&#62; <**EXPRESION**> &#60;RDERPARENTESIS&#62; 
 
-FUNCION_ARITMETICA  : TIPO_FUNCION_ARITMETICA RIZQPARENTESIS EXPRESION RDERPARENTESIS
-;
+<**INSTRUCCIONES_INTERNAS**> ::= <**INSTRUCCIONES_INTERNAS**> <**INSTRUCCION_INTERNA**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**INSTRUCCION_INTERNA**> 
 
-INSTRUCCIONES_INTERNAS : INSTRUCCIONES_INTERNAS INSTRUCCION_INTERNA        { $1.push($2); $$ = $1;} 
-                     | INSTRUCCION_INTERNA                                 { $$ = [$1]; }
-;
+<**INSTRUCCION_INTERNA**> ::=  <**DECLARACION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**ASIGNACION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**IMPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**LLAMADA**> &#60;RPUNTOYCOMA&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**CONDICIONAL_IF**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**SWITCH**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**WHILE**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**DO_WHILE**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**FOR**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RRETURN&#62; &#60;RPUNTOYCOMA&#62;  \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RRETURN&#62; <**EXPRESION**> &#60;RPUNTOYCOMA&#62;  \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RBREAK&#62; &#60;RPUNTOYCOMA&#62;  \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RINCREMENTORPUNTOYCOMA&#62;  \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RDECREMENTORPUNTOYCOMA&#62;  
 
-INSTRUCCION_INTERNA     : DECLARACION                       { $$ = $1 }     
-                        | ASIGNACION                        { $$ = $1 }
-                        | IMPRESION                         { $$ = $1 }           
-                        | LLAMADA RPUNTOYCOMA
-                        | CONDICIONAL_IF                    { $$ = $1 }                  
-                        | SWITCH                            { $$ = $1 }
-                        | WHILE                             { $$ = $1 }
-                        | DO_WHILE                          { $$ = $1 }
-                        | FOR
-                        | RRETURN RPUNTOYCOMA               { $$ = new Return([],@1.first_line, @1.first_column); }
-                        | RRETURN EXPRESION RPUNTOYCOMA     { $$ = new Return($2,@1.first_line, @1.first_column); }
-                        | RBREAK RPUNTOYCOMA                { $$ = new Break(@1.first_line, @1.first_column); }
-                        | EXPRESION RINCREMENTORPUNTOYCOMA
-                        | EXPRESION RDECREMENTORPUNTOYCOMA
-;
+<**EXPRESION**> ::=  &#60;RRESTA&#62; <**EXPRESION**> &#60;%prec&#62; &#60;%UMENOS&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RAMPERSON&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RPOTENCIA&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RSUMA&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RRESTA&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RMULTIPLICACION&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RDIVISION&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RMODULAR&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RMENORQUE&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RMAYORQUE&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RMENORQUEIGUAL&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RMENORQUEIGUAL&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RIGUALDAD&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RDIFERENCIA&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RAND&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;ROR&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RNOT&#62; <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;ENTERO&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RTRUE&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RFALSE&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;CADENA&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;CARACTER&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RNULL&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;NAME&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;NAME&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;NAME&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;NAME&#62; &#60;RPUNTO&#62; &#60;NAME&#62; &#60;RIZQPARENTESIS&#62; &#60;RDERPARENTESIS&#62;  \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;NAME&#62; &#60;RPUNTO&#62; &#60;NAME&#62; &#60;RIZQPARENTESIS&#62; <**LISTA_DE_PARAMETROS**> &#60;RDERPARENTESIS&#62;  \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;CADENA&#62; &#60;RPUNTO&#62; &#60;NAME&#62; &#60;RIZQPARENTESIS&#62;  &#60;RDERPARENTESIS&#62;  \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;CADENA&#62; &#60;RPUNTO&#62; &#60;NAME&#62; &#60;RIZQPARENTESIS&#62;  <**LISTA_DE_PARAMETROS**> &#60;RDERPARENTESIS&#62;  \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RTERNARIO&#62; <**EXPRESION**> &#60;RDOSPUNTOS&#62;  <**EXPRESION**> \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RINCREMENTO&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**EXPRESION**> &#60;RDECREMENTO&#62; \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**LLAMADA**>  \  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**NATIVAS**>  \ 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   <**FUNCION_ARITMETICA**>  \ 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      |   &#60;RIZQPARENTESIS&#62; <**EXPRESION**> &#60;RDERPARENTESIS&#62;  \ 
 
-EXPRESION : RRESTA EXPRESION %prec UMENOS	                  { $$ = new Operacion($2,$2,Operador.MENOS_UNARIO, @1.first_line, @1.first_column); }    
-          | EXPRESION RAMPERSON EXPRESION		                { $$ = new Operacion($1,$3,Operador.CONCATENACION, @1.first_line, @1.first_column); }
-          | EXPRESION RPOTENCIA EXPRESION	                  { $$ = new Operacion($1,$3,Operador.REPETICION, @1.first_line, @1.first_column); }	
-          | EXPRESION RSUMA EXPRESION                       { $$ = new Operacion($1,$3,Operador.SUMA, @1.first_line, @1.first_column); }
-          | EXPRESION RRESTA EXPRESION		                  { $$ = new Operacion($1,$3,Operador.RESTA, @1.first_line, @1.first_column); }	
-          | EXPRESION RMULTIPLICACION EXPRESION		          { $$ = new Operacion($1,$3,Operador.MULTIPLICACION, @1.first_line, @1.first_column); }
-          | EXPRESION RDIVISION EXPRESION	                  { $$ = new Operacion($1,$3,Operador.DIVISION, @1.first_line, @1.first_column); } 
-          | EXPRESION RMODULAR EXPRESION	                  { $$ = new Operacion($1,$3,Operador.MODULO, @1.first_line, @1.first_column); }   
-          | EXPRESION RMENORQUE EXPRESION		                        { $$ = new Operacion($1,$3,Operador.MENOR_QUE, @1.first_line, @1.first_column); }
-          | EXPRESION RMAYORQUE EXPRESION		                        { $$ = new Operacion($1,$3,Operador.MAYOR_QUE, @1.first_line, @1.first_column); }
-          | EXPRESION RMENORQUEIGUAL EXPRESION	                    { $$ = new Operacion($1,$3,Operador.MENOR_IGUA_QUE, @1.first_line, @1.first_column); }
-          | EXPRESION RMAYORQUEIGUAL EXPRESION	                    { $$ = new Operacion($1,$3,Operador.MAYOR_IGUA_QUE, @1.first_line, @1.first_column); }
-          | EXPRESION RIGUALDAD EXPRESION	                          { $$ = new Operacion($1,$3,Operador.IGUAL_IGUAL, @1.first_line, @1.first_column); }
-          | EXPRESION RDIFERENCIA EXPRESION                         { $$ = new Operacion($1,$3,Operador.DIFERENTE_QUE, @1.first_line, @1.first_column); }
-          | EXPRESION RAND EXPRESION                        { $$ = new Operacion($1,$3,Operador.AND, @1.first_line, @1.first_column); }
-          | EXPRESION ROR EXPRESION                         { $$ = new Operacion($1,$3,Operador.OR, @1.first_line, @1.first_column); }
-          | RNOT EXPRESION	   	                                    { $$ = new Operacion($2,$2,Operador.NOT, @1.first_line, @1.first_column); }
-          | NAME                                                                          { $$ = new AccesoName($1, @1.first_line, @1.first_column); }
-          | ENTERO		                                                                    { $$ = new Primitivo(Number($1), this._$.first_line, this._$.first_column); }		
-          | DECIMAL				                                                                { $$ = new Primitivo(Number($1), this._$.first_line, this._$.first_column); }
-          | RTRUE				                                                                  { $$ = new Primitivo(true,this._$.first_line,this._$.first_column); }
-          | RFALSE	     	                                                                { $$ = new Primitivo(false,this._$.first_line,this._$.first_column); }
-          | CADENA	                                                                      { $$ = new Primitivo($1, @1.first_line, @1.first_column); }
-          | CARACTER                                                                      { $$ = new Primitivo($1, @1.first_line, @1.first_column); }
-          | RNULL                                                                         { $$ = new Primitivo(null, @1.first_line, @1.first_column); }
-          | NAME RPUNTO NAME RIZQPARENTESIS RDERPARENTESIS
-          | NAME RPUNTO NAME RIZQPARENTESIS LISTA_DE_PARAMETROS RDERPARENTESIS
-          | CADENA RPUNTO NAME RIZQPARENTESIS RDERPARENTESIS
-          | CADENA RPUNTO NAME RIZQPARENTESIS LISTA_DE_PARAMETROS RDERPARENTESIS
-          | EXPRESION RTERNARIO EXPRESION RDOSPUNTOS EXPRESION
-          | EXPRESION RINCREMENTO
-          | EXPRESION RDECREMENTO       
-          | LLAMADA 
-          | NATIVAS
-          | FUNCION_ARITMETICA
-          | RIZQPARENTESIS EXPRESION RDERPARENTESIS	       { $$ = $2 }  	    
-          ;
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
