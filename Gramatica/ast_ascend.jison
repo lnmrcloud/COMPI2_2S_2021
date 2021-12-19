@@ -208,24 +208,27 @@ PALABRAS RESERVADAS DE QUETZAL -----------------------------------------------
 START : INSTRUCCIONES EOF                   {$$ = {node: newNode(yy, yystate, $1.node, 'EOF') };return $$; }
 ;
 
-INSTRUCCIONES : INSTRUCCIONES INSTRUCCION   { $$ = { node: newNode(yy, yystate, $1.node, $2.node) }}      
+INSTRUCCIONES : INSTRUCCIONES INSTRUCCION    { $$ = { node: newNode(yy, yystate, $1.node, $2.node) }}      
               | INSTRUCCION                 { $$ = { node: newNode(yy, yystate, $1.node) }}                      
 ;
 
 INSTRUCCION   : DECLARACION                 { $$ = { node: newNode(yy, yystate, $1.node) }}                       
               | ASIGNACION                  { $$ = { node: newNode(yy, yystate, $1.node) }}    
-              | IMPREESION                  { $$ = { node: newNode(yy, yystate, $1.node) }}           
+              | IMPRESION                   { $$ = { node: newNode(yy, yystate, $1.node) }}           
               | FUNCIONES                   { $$ = { node: newNode(yy, yystate, $1.node) }}
-              | CONDICIONAL_IF              { $$ = { node: newNode(yy, yystate, $1.node) }}            
+              | CONDICIONAL_IF              { $$ = { node: newNode(yy, yystate, $1.node) }} 
+              | SWITCH                      { $$ = { node: newNode(yy, yystate, $1.node) }}   
+              | WHILE                       { $$ = { node: newNode(yy, yystate, $1.node) }}
+              | DO_WHILE                    { $$ = { node: newNode(yy, yystate, $1.node) }}          
 ;
 
 DECLARACION : TIPO NAME RASIGNACION EXPRESION RPUNTOYCOMA                                 { $$ = { node: newNode(yy, yystate, $1.node, $2, $4.node) }}               
-            | TIPO LISTA_DE_DECLARACION RPUNTOYCOMA                                       { $$ = { node: newNode(yy, yystate, $1.node, $2.node) }}
+            | TIPO LISTA_DE_DECLARACION RPUNTOYCOMA                                      { $$ = { node: newNode(yy, yystate, $1.node, $2.node) }}
             | RSTRUCT NAME RIZQLLAVE LISTA_DE_ATRIBUTOS RDERLLAVE RPUNTOYCOMA
             | TIPO RIZQCORCHETE RDERCORCHETE NAME RASIGNACION CUERPO_ARRAY RPUNTOYCOMA    { $$ = { node: newNode(yy, yystate, $1.node, $4, $6.node) }}
 ;
 
-LISTA_DE_ATRIBUTOS  : LISTA_DE_ATRIBUTOS RCOMA ATRIBUTO                                    { $$ = { node: newNode(yy, yystate, $1.node, $3.node) }}
+LISTA_DE_ATRIBUTOS  : LISTA_DE_ATRIBUTOS RCOMA ATRIBUTO                                   { $$ = { node: newNode(yy, yystate, $1.node, $3.node) }}
                     | ATRIBUTO                                                             { $$ = { node: newNode(yy, yystate, $1.node) }}
 ;
 
@@ -233,14 +236,14 @@ ATRIBUTO : TIPO NAME         { $$ = { node: newNode(yy, yystate, $1.node, $2) }}
          | NAME NAME         { $$ = { node: newNode(yy, yystate, $1, $2) }}
 ;
 
-LISTA_DE_DECLARACION  : LISTA_DE_DECLARACIONES RCOMA NAME     { $$ = { node: newNode(yy, yystate, $1.node, $3) }}  
+LISTA_DE_DECLARACION  : LISTA_DE_DECLARACION RCOMA NAME      { $$ = { node: newNode(yy, yystate, $1.node, $3) }}  
                       | NAME                                  { $$ = { node: newNode(yy, yystate, $1) }}    
 ;
 
 CUERPO_ARRAY  : RIZQCORCHETE LISTA_DE_PARAMETROS RDERCORCHETE 
 ;
 
-ASIGNACION : NAME RASIGNACION EXPRESION RPUNTOYCOMA                                                       { $$ = { node: newNode(yy, yystate, $1, $2.node) }}                  
+ASIGNACION : NAME RASIGNACION EXPRESION RPUNTOYCOMA                                                      { $$ = { node: newNode(yy, yystate, $1, $2.node) }}                  
            | NAME NAME RASIGNACION NAME RIZQPARENTESIS LISTA_DE_PARAMETROS RDERPARENTESIS RPUNTOYCOMA     { $$ = { node: newNode(yy, yystate, $1, $2, $4, $6.node) }} 
 ;
 
@@ -257,6 +260,7 @@ TIPO_PRIMITIVO :    RINT            { $$ = { node: newNode(yy, yystate, $1) }}
 
 IMPRESION : RPRINTLN RIZQPARENTESIS LISTA_IMPRESION RDERPARENTESIS RPUNTOYCOMA        { $$ = { node: newNode(yy, yystate, $1, $3.node) }}
                 | RPRINT RIZQPARENTESIS EXPRESION RDERPARENTESIS RPUNTOYCOMA          { $$ = { node: newNode(yy, yystate, $1, $3.node) }}
+                | RPRINTLN RIZQPARENTESIS EXPRESION RDERPARENTESIS RPUNTOYCOMA        { $$ = { node: newNode(yy, yystate, $1, $3.node) }}
 ;
 
 LISTA_IMPRESION : LISTA_IMPRESION RCOMA EXPRESION                                     { $$ = { node: newNode(yy, yystate, $1.node, $3.node) }} 
@@ -274,11 +278,11 @@ LISTA_DE_PARAMETROS : LISTA_DE_PARAMETROS RCOMA EXPRESION                       
 NATIVAS          : TIPO RPUNTO RPARSE RIZQPARENTESIS EXPRESION RDERPARENTESIS          { $$ = { node: newNode(yy, yystate, $1.node, $3, $5.node) }}
                  | RTOINT RIZQPARENTESIS EXPRESION RDERPARENTESIS                      { $$ = { node: newNode(yy, yystate, $1, $3.node) }}
                  | RTODOUBLE RIZQPARENTESIS EXPRESION RDERPARENTESIS                   { $$ = { node: newNode(yy, yystate, $1, $3.node) }}
-                 | RSTRING_CAST RIZQPARENTESIS EXPRESION RDERPARENTESIS                { $$ = { node: newNode(yy, yystate, $1, $3.node) }}
-                 | RTYPEOF RIZQPARENTESIS EXPRESION RDERPARENTESIS                     { $$ = { node: newNode(yy, yystate, $1, $3.node) }}        
+                 | RSTRING_CAST RIZQPARENTESIS EXPRESION RDERPARENTESIS               { $$ = { node: newNode(yy, yystate, $1, $3.node) }}
+                 | RTYPEOF RIZQPARENTESIS EXPRESION RDERPARENTESIS                      { $$ = { node: newNode(yy, yystate, $1, $3.node) }}        
 ;
 
-CONDICIONAL_IF  : RIF RIZQPARENTESIS EXPRESION RDERPARENTESIS BLOQUE_INSTRUCCIONES                                   { $$ = { node: newNode(yy, yystate, $1, $3.node, $5.node) }}            
+CONDICIONAL_IF  : RIF RIZQPARENTESIS EXPRESION RDERPARENTESIS BLOQUE_INSTRUCCIONES                                  { $$ = { node: newNode(yy, yystate, $1, $3.node, $5.node) }}            
                 | RIF RIZQPARENTESIS EXPRESION RDERPARENTESIS BLOQUE_INSTRUCCIONES RELSE CONDICIONAL_IF              { $$ = { node: newNode(yy, yystate, $1, $3.node, $5.node, $6, $7.node) }}   
                 | RIF RIZQPARENTESIS EXPRESION RDERPARENTESIS BLOQUE_INSTRUCCIONES RELSE BLOQUE_INSTRUCCIONES        { $$ = { node: newNode(yy, yystate, $1, $3.node, $5.node, $6, $7.node) }}  
 ;
@@ -298,8 +302,8 @@ BLOQUE_SWITCH   : BLOQUE_SWITCH ESTRUCTURA_CASE             { $$ = { node: newNo
 ;
 
 ESTRUCTURA_CASE : RCASE EXPRESION RDOSPUNTOS INSTRUCCIONES_INTERNAS      { $$ = { node: newNode(yy, yystate, $1, $2.node, $4.node) }}    
-                | RDEFAULT EXPRESION RDOSPUNTOS INSTRUCCIONES_INTERNAS   { $$ = { node: newNode(yy, yystate, $1, $3.node) }} 
-;
+                | RDEFAULT RDOSPUNTOS INSTRUCCIONES_INTERNAS   { $$ = { node: newNode(yy, yystate, $1, $3.node) }} 
+;                 
 
 WHILE  : RWHILE RIZQPARENTESIS EXPRESION RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE { $$ = { node: newNode(yy, yystate, $1, $3.node, $6.node) }}
 ;
@@ -315,8 +319,8 @@ DECLARAR_ASIGNACION : TIPO NAME RASIGNACION EXPRESION       { $$ = { node: newNo
                     | EXPRESION                             { $$ = { node: newNode(yy, yystate, $1.node) }} 
 ;
 
-FUNCIONES : NAME NAME RIZQPARENTESIS RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE                            { $$ = { node: newNode(yy, yystate, $1, $2, $6.node) }}
-                | NAME NAME RIZQPARENTESIS LISTA_DE_ATRIBUTOS RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE     { $$ = { node: newNode(yy, yystate, $1, $2, $4.node, $7.node) }}
+FUNCIONES : TIPO NAME RIZQPARENTESIS RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE                           { $$ = { node: newNode(yy, yystate, $1, $2, $6.node) }}
+                | TIPO NAME RIZQPARENTESIS LISTA_DE_ATRIBUTOS RDERPARENTESIS RIZQLLAVE INSTRUCCIONES_INTERNAS RDERLLAVE     { $$ = { node: newNode(yy, yystate, $1, $2, $4.node, $7.node) }}
 ;
 
 TIPO_FUNCION_ATRIBUTO : RPOW     { $$ = { node: newNode(yy, yystate, $1) }} 
