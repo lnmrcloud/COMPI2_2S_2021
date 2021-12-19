@@ -51,3 +51,7 @@ Area de reportes y traduccion
 
 
 ![Imagen 4](/images/imagen4.PNG)
+
+___
+## License
+[MIT](https://choosealicense.com/licenses/mit/)

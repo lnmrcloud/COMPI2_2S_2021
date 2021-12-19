@@ -51,10 +51,20 @@ Reglas de Traduccion
 
 ## CARPETAS PRINCIPALES
 
-+ 
++ AST, Manejo de atributos de objetos para armar arbol y entornos
++ Expresiones, Manejo de las operaciones del proyecto
++ Instrucciones, Manejo de los objetos e instrucciones de lenguaje
++ Gramatica, gramaticas de proyecto en .jison y js
+    + jison gramatica.jison
++ Interfaces, Manejo de clases abstractas
++ Reporte_Gramatical, Detalles de gramatica
++ chart, libreria d3.js
 
 ## ARCHIVOS PRINCIPALES
 
 + interpretar.js, manejo del flujo de la interpretacion y ejecucion de codigo
 + index.html, interfaz grafica del proyecto
-+ 
+
+___
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
