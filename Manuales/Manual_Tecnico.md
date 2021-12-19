@@ -22,6 +22,10 @@ ___
 - Entrada, Quetzal (Java y C++)
 - Salida, 3DC
 
+## DEPLOYMENT
+
+- Github pages [QUETZAL OLC2 - 2S-DICIEMBRE](https://lnmrcloud.github.io/COMPI2_2S_2021/)
+
 ## GRAMATICAS
 
 Detalle de gramatica de proyecto ascendente [Gramatica Ascendente](https://github.com/lnmrcloud/COMPI2_2S_2021/blob/main/Reporte_Gramatical/Ascendente.md). \
