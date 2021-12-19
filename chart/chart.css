@@ -1,7 +1,7 @@
 .node circle {
     fill: #fff;
-    stroke: steelblue;
-    stroke-width: 3px;
+    stroke: rgb(187, 113, 2);
+    stroke-width: 5px;
 }
 
 .node text {
@@ -10,6 +10,7 @@
 
 .link {
     fill: none;
-    stroke: #ccc;
-    stroke-width: 2px;
+    stroke: rgb(34, 3, 104);
+    stroke-width: 1px;
+    opacity: 0.5;
 }

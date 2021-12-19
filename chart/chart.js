@@ -30,7 +30,7 @@ function generateTree(treeData) {
         .style("font-size", "24px") 
         .style("text-decoration", "underline")  
         .style("font-weight", "500")  
-        .text("AST");
+        .text("AST_ASCENDENTE");
 
     root = treeData[0];
     root.x0 = width;
