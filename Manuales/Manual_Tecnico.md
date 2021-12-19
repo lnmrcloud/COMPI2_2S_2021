@@ -27,9 +27,18 @@ ___
 Detalle de gramatica de proyecto ascendente [Gramatica Ascendente](https://github.com/lnmrcloud/COMPI2_2S_2021/blob/main/Reporte_Gramatical/Ascendente.md). \
 Detalle de gramatica de proyecto ascendente [Gramatica Descendente](https://github.com/lnmrcloud/COMPI2_2S_2021/blob/main/Reporte_Gramatical/Descendente.md).
 
+Eliminacion de recursividad por la Izquierda:
+
+A - > A &#913;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |  B\ 
+
+A - > &#914; A'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |  &#913;  A' \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |  &#917; 
+
 ## TRADUCCION
 
-Reglas de Traduccion \
+Reglas de Traduccion 
 
 + Asignacion: **X** = y **op** Z
 + Operacion unaria: **X** = **op** Z
@@ -39,3 +48,13 @@ Reglas de Traduccion \
 + Llamadas: param **X** = call p,n;
 + Copia indexada: **X** = y[i]
 + Asignacion direccional: x = &y
+
+## CARPETAS PRINCIPALES
+
++ 
+
+## ARCHIVOS PRINCIPALES
+
++ interpretar.js, manejo del flujo de la interpretacion y ejecucion de codigo
++ index.html, interfaz grafica del proyecto
++ 
