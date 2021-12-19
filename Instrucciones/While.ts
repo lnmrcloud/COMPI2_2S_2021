@@ -1,4 +1,3 @@
-import { hostname } from "os";
 import { AST } from "../AST/AST";
 import { Entorno } from "../AST/Entorno";
 import { Simbolo } from "../AST/Simbolo";
@@ -28,14 +27,13 @@ export class While implements Instruccion{
         const entornoWhile = new Entorno(ent);
         //verificar que la exp sea booleana
         
-        while(this.condicion.getValorImplicito(ent,arbol)){
-            
+        do{  
             this.lista_instrucciones.forEach((instruccion) => {
                 instruccion.ejecutar(entornoWhile, arbol);
                 
             })
             
-        } 
+        }while(this.condicion.getValorImplicito(ent,arbol)) 
         
     }
 

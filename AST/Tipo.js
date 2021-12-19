@@ -6,7 +6,7 @@ var Tipo;
     Tipo[Tipo["STRING"] = 0] = "STRING";
     Tipo[Tipo["INT"] = 1] = "INT";
     Tipo[Tipo["DOUBLE"] = 2] = "DOUBLE";
-    Tipo[Tipo["BOOL"] = 3] = "BOOL";
+    Tipo[Tipo["BOOLEAN"] = 3] = "BOOLEAN";
     Tipo[Tipo["CHAR"] = 4] = "CHAR";
     Tipo[Tipo["VOID"] = 5] = "VOID";
     Tipo[Tipo["STRUCT"] = 6] = "STRUCT";
