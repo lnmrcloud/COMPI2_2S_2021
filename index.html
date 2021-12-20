@@ -60,7 +60,7 @@
                     <input type="button" value="Traducir"  />
                     <input type="button" value="AST" onclick="graficar();"  />
                     <input type="button" value="Tabla de Simbolos"  />
-                    <input type="button" value="Reporte Gramatical"  />
+                    <input type="button" value="Reporte Gramatical" onclick="reporte_gramatical();">
                     <input type="button" value="Errores" onclick="mostrarErrores();">
                     
                     <br>
@@ -90,6 +90,13 @@
             </tr>
         </table>
     </div>
+
+    <div id="gramatical_titulo"></div>
+        <h2>Reporte Gramatical</h2>
+    </div> 
+    <div id="gramatical_txt">                   
+        <textarea id="console"  name="console" style="resize:none; overflow-y: scroll; "   rows="10" cols="140"></textarea>
+    </div> 
 
 </body>
 
@@ -132,6 +139,7 @@
 
 <script src="./Gramatica/ast_ascend.js"></script>
 <script src="./Gramatica/gramatica.js"></script>
+<script src="./Gramatica/gramatical_asc.js"></script>
 
 <!-- HERRAMIENTAS  -->
 

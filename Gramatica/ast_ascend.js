@@ -84,7 +84,7 @@ performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* actio
 var $0 = $$.length - 1;
 switch (yystate) {
 case 1:
-this.$ = {node: newNode(yy, yystate, $$[$0-1].node, 'EOF') };return this.$; 
+this.$ = {node: newNode(yy, yystate, $$[$0-1].node, 'EOF') }; return this.$; 
 break;
 case 2: case 55: case 73:
  this.$ = { node: newNode(yy, yystate, $$[$0-1].node, $$[$0].node) }

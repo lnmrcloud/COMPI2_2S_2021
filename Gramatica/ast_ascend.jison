@@ -205,7 +205,7 @@ PALABRAS RESERVADAS DE QUETZAL -----------------------------------------------
 %%
 
 /* Definición de la gramática */
-START : INSTRUCCIONES EOF                   {$$ = {node: newNode(yy, yystate, $1.node, 'EOF') };return $$; }
+START : INSTRUCCIONES EOF                   {$$ = {node: newNode(yy, yystate, $1.node, 'EOF') }; return $$; }
 ;
 
 INSTRUCCIONES : INSTRUCCIONES INSTRUCCION    { $$ = { node: newNode(yy, yystate, $1.node, $2.node) }}      

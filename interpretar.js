@@ -1,4 +1,5 @@
 let consola_resultado ="";
+document.getElementById('errores').innerHTML = "";
 
 function interpretar(){
     
@@ -16,12 +17,21 @@ function interpretar(){
         ast.funciones[noMain].ejecutar(entornoGlobal,ast);
     }
 
-    ast.instrucciones.forEach((element) => {
-        element.ejecutar(entornoGlobal,ast);
+    if(ast.instrucciones!=null){
+        ast.instrucciones.forEach((element) => {
+            element.ejecutar(entornoGlobal,ast);
     })
+    }else{
+        
+    }
 
     salida.setValue(consola_resultado);
 
+}
+
+function mostrarGramatical(result){
+
+    document.getElementById("gramatical_txt").innerHTML = result;
 }
 
 function mostrarErrores(){
@@ -59,8 +69,15 @@ function mostrarErrores(){
 
     document.getElementById('errores').innerHTML = html;
     
+    
 }
 
+function reporte_gramatical(){
+    const content = entrada.getValue();
+    var result = gramatical_asc.parse(content);
+    console.log("reporte gramatical: \n" + result);
+    mostrarGramatical(result);
+}
 
 function graficar(){
     const content = entrada.getValue();

@@ -210,6 +210,7 @@ START : INSTRUCCIONES EOF    {return new AST($1,$1);}
 
 INSTRUCCIONES : INSTRUCCIONES INSTRUCCION         { $1.push($2); $$ = $1;}  
               | INSTRUCCION                       { $$ = [$1]; }   
+//              | error                             { $$ = new Error("Sintactico", yytext, this._$.first_line, this._$.first_column);console.log("Sintactico", yytext, this._$.first_line, this._$.first_column)}
 ;
 
 INSTRUCCION   : DECLARACION          { $$ = $1 }                 
