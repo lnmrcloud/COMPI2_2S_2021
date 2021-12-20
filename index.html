@@ -57,7 +57,7 @@
                 <div id="ide3">  
                     <br>              
                     <input type="button" value="Interpretar"  onclick="interpretar();" />
-                    <input type="button" value="Traducir"  />
+                    <input type="button" value="Traducir" onclick="traduccion();" />
                     <input type="button" value="AST" onclick="graficar();"  />
                     <input type="button" value="Tabla de Simbolos"  />
                     <input type="button" value="Reporte Gramatical" onclick="reporte_gramatical();">
@@ -71,7 +71,7 @@
             <td align="center" colspan="3">  
                 <!-- AREA DE TEXTO PARA RESULTADO -->                
                 <div id="ide3">                    
-                    <textarea id="console"  name="console" style="resize:none; overflow-y: scroll; "   rows="10" cols="140"></textarea>
+                    <textarea id="consola_traduccion"  name="console" style="resize:none; overflow-y: scroll; "   rows="10" cols="140"></textarea>
                 </div> 
                 <hr>
                 <br> 
@@ -154,13 +154,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
 <script src="./chart/chart.js"></script>
 
-
 <!-- INTERPRETACION  -->
 <script src="interpretar.js"></script> 
 
 <!-- ERRORES  -->
 <script src="./Error.js"></script>
 <script src="./ReporteErrores.js"></script>
+
+<!-- TABLA SIMBOLOS  -->
+<script src="./TablaSimbolo/Simbolo_objeto.js"></script>
+<script src="./TablaSimbolo/SimboloFuncion.js"></script>
+<script src="./TablaSimbolo/Tabla.js"></script>
 
 <script type="text/javascript">
     document.getElementById('inputfile')
@@ -188,6 +192,11 @@
     });    
     salida.setSize(1500, 100);
 
+    var consola_traduccion = CodeMirror.fromTextArea(document.getElementById("consola_traduccion"), {        
+        mode: "javascript"        
+    });    
+    consola_traduccion.setSize(1500, 100);
+    
     /*var txttraduc = CodeMirror.fromTextArea(document.getElementById("txtTraduccion"), {        
         mode: "javascript"        
     });    

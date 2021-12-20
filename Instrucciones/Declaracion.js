@@ -12,8 +12,32 @@ var Declaracion = /** @class */ (function () {
         this.columna = columna;
         this.expresion = exp;
     }
-    Declaracion.prototype.traducir = function (ent, arbol) {
-        throw new Error("Method not implemented.");
+    Declaracion.prototype.traducir = function (tablasimbolos) {
+        let codigo = "";
+        if(this.expresion==null){
+            return codigo;
+        }
+       
+        let variable = tablasimbolos.getVariable(this.identificadores);
+        console.log(variable);
+        
+        if(variable != null && this.expresion != ""){
+            console.log("Entre a expresion en declaracion para traducir valor");
+            let valor3D = this.expresion.getC3D(tablasimbolos);
+            codigo += valor3D;
+
+            if(!tablasimbolos.ambito){
+                codigo += `heap[${variable.Direccion}] = ${tablasimbolos.getTemporalActual()};\n\n`;
+            }else{
+                let tempActual = tablasimbolos.getTemporalActual();
+                let tempNuevo = tablasimbolos.getTemporal();
+                codigo += `${tempNuevo} = p;\n`;
+                codigo += `${tempNuevo} = ${tempNuevo} + ${variable.Direccion};\n`;
+                codigo += `stack[(int)${tempNuevo}] = ${tempActual};\n\n`;
+            }
+            tablasimbolos.QuitarTemporalNoUsado(tablasimbolos.getTemporal);
+        }
+        return codigo;
     };
     Declaracion.prototype.ejecutar = function (ent, arbol) {
         var _this = this;

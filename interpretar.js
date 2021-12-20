@@ -1,8 +1,13 @@
 let consola_resultado ="";
 document.getElementById('errores').innerHTML = "";
 
+var indice = 0;
+var ambitos = [];
+var hayError = false;
+var tablasimbolos;
+
 function interpretar(){
-    
+
     const content = entrada.getValue();
     const ast = gramatica.parse(content);    
     const entornoGlobal = new Entorno(null);
@@ -134,4 +139,84 @@ function agrupar_consola_sin_salto(resultado_print){
 
 function agrupar_consola_con_salto(resultado_print){
     consola_resultado = consola_resultado + '\n' + resultado_print;
+}
+
+function traduccion(){
+    tablasimbolos = new Tabla();
+    const content = entrada.getValue();
+    const ast = gramatica.parse(content);    
+    const entornoGlobal = new Entorno(null);
+
+    salida.setValue(""); // LIMPIAMOS CONSOLA
+
+    const noMain = ast.ejecutarMain();
+
+    if(noMain == null){
+        console.log("no existe main");
+    }else {
+        ast.funciones[noMain].ejecutar(entornoGlobal,ast);
+    }
+
+    if(ast.instrucciones!=null){
+        ast.instrucciones.forEach((element) => {
+            element.ejecutar(entornoGlobal,ast);
+    })
+    }else{
+        
+    }
+
+    salida.setValue(consola_resultado);
+
+    // fin de interpretar 
+    // inicia el traducir 
+
+    tablasimbolos.TamAmbitoActual.push(0);
+    let globales = 0;
+
+    ast.instrucciones.map(i => {
+        if(i instanceof Declaracion){
+            console.log("hola entre a declaraciones 3d");
+            i.posicion = this.tablasimbolos.getHeap();
+            globales++;
+        }
+
+    });
+
+    let codigo3d = "";
+    codigo3d = "#include <stdio.h>\n#include <math.h>\n\ndouble heap[16384];\ndouble stack[16394];\ndouble p;\ndouble h;\n\n"
+
+    //Declarar aqui todos los temporales se imprimen todos en la misma linea
+    for(let i = 0; i< tablasimbolos.TemporalesDeclarar.length; i++){
+        let a = tablasimbolos.TemporalesDeclarar[i];
+        let ultimo = tablasimbolos.TemporalesDeclarar.length - 1;
+
+        if(i == 0 && i < ultimo){
+            codigo3d += `double ${a}, `;
+        }
+        if(i == 0 && i == ultimo){
+            codigo3d += `double ${a};`;
+        }
+        if(i > 0 && i < ultimo){
+         codigo3d += `${a}, `;
+        }
+        if(i > 0 && i == ultimo){
+         codigo3d += `${a};\n`;
+        }
+     }
+
+     ast.instrucciones.map(i => {
+        if(i instanceof Declaracion){
+            codigo3d += i.traducir(tablasimbolos);
+            globales++;
+        }
+
+    });
+
+    codigo3d += `\n`;
+    tablasimbolos.Temporal = 0;
+    tablasimbolos.Etiqueta = 0;
+    tablasimbolos.inicioArregloGlobal = [];
+    tablasimbolos.TemporalesDeclarar = [];
+
+    consola_traduccion.setValue(codigo3d);
 }
