@@ -14,6 +14,7 @@ var Funcion = /** @class */ (function () {
         throw new Error("Method not implemented.");
     };
     Funcion.prototype.ejecutar = function (ent, arbol) {
+        console.log("Entre en ejecutar FUNCION");
         var entornoFuncion = new Entorno(ent);
         this.lista_instrucciones.forEach(function (instruccion) {
             instruccion.ejecutar(entornoFuncion, arbol);

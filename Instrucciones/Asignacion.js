@@ -12,6 +12,7 @@ var Asignacion = /** @class */ (function () {
         throw new Error("Method not implemented.");
     };
     Asignacion.prototype.ejecutar = function (ent, arbol) {
+        console.log("Entre en ejecutar ASIGNACION");
         if (ent.existe(this.identificador)) {
             var simbolo = ent.getSimbolo(this.identificador);
             if (simbolo.getTipo(ent, arbol) === this.expresion.getTipo(ent, arbol)) {

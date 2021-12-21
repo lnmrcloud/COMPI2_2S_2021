@@ -19,10 +19,12 @@ var Declaracion = /** @class */ (function () {
         }
        
         let variable = tablasimbolos.getVariable(this.identificadores);
-        console.log(variable);
-        
+        //console.log(variable);
+
         if(variable != null && this.expresion != ""){
+
             console.log("Entre a expresion en declaracion para traducir valor");
+
             let valor3D = this.expresion.getC3D(tablasimbolos);
             codigo += valor3D;
 
@@ -40,14 +42,18 @@ var Declaracion = /** @class */ (function () {
         return codigo;
     };
     Declaracion.prototype.ejecutar = function (ent, arbol) {
+        //console.log("Entre en ejecutar DECLARACION");
         var _this = this;
+
         this.identificadores.forEach(function (id) {
             if (!ent.existe(id)) {
                 if (_this.expresion !== null) {
-                    //console.error(this.expresion.getTipo(ent, arbol));
                     if (_this.tipo === _this.expresion.getTipo(ent, arbol)) {
                         var valor = _this.expresion.getValorImplicito(ent, arbol);
-                        var simbolo = new Simbolo(_this.tipo, id, _this.linea, _this.columna, valor);
+                        let simbolo = new Simbolo(_this.tipo, id, _this.linea, _this.columna, valor);
+                        //console.log("tipo:" + _this.tipo + "id:" + id + "linea:" + _this.linea + "columna:" + _this.columna + "valor:" + valor);
+                        //console.log("tipo:" + simbolo.tipo + "id:" + simbolo.indentificador + "linea:" + simbolo.linea + "columna:" + simbolo.columna + "valor:" + simbolo.valor);
+                        agregar_a_tablasimbolos(simbolo);
                         ent.agregar(id, simbolo);
                     }
                     else {
@@ -55,7 +61,8 @@ var Declaracion = /** @class */ (function () {
                     }
                 }
                 else {
-                    var simbolo = new Simbolo(_this.tipo, id, _this.linea, _this.columna, _this.getValorDefault());
+                    let simbolo = new Simbolo(_this.tipo, id, _this.linea, _this.columna, _this.getValorDefault());
+                    agregar_a_tablasimbolos(simbolo);
                     ent.agregar(id, simbolo);
                 }
             }
@@ -63,7 +70,8 @@ var Declaracion = /** @class */ (function () {
                 console.error("error semantico", _this.linea, "columna", _this.columna);
             }
         });
-    };
+    }
+    ;
     Declaracion.prototype.getValorDefault = function () {
         if (this.tipo === Tipo.INT)
             return 0;

@@ -17,15 +17,15 @@ class Tabla {
     }
 
     //Insertar un nuevo simbolo a la tabla de variables
-    setVariable(Simbolo_objeto){
+    setVariable(simbolo){
         for(let elemento of this.TablaVariables){
-            if(elemento.Identificador == Simbolo_objeto.Identificador){
+            if(elemento.Identificador == simbolo.Identificador){
                 //console.log(`La variable ${simbolo.identificador} ya existe.`);
-                return `La variable ${Simbolo_objeto.identificador} ya existe.`
+                return `La variable ${simbolo.identificador} ya existe.`
             }
         }
-        //console.log("elemento insertado");
-        this.TablaVariables.push(Simbolo_objeto);
+        console.log("tipo:" + simbolo.tipo + "id:" + simbolo.indentificador + "linea:" + simbolo.linea + "columna:" + simbolo.columna + "valor:" + simbolo.valor);
+        this.TablaVariables.push(simbolo);
         return null;
     }
 
@@ -33,7 +33,6 @@ class Tabla {
     getVariable(id){
         for(let elemento of this.TablaVariables){
             if(elemento.identificadores == id){
-                //console.log("elemento igual");
                 return elemento
             }
         }
@@ -42,13 +41,13 @@ class Tabla {
     }
 
     //Almacenar una nueva funcion en la tabla de funciones
-    setFuncion(Simbolo_objeto){
+    setFuncion(simbolo){
         for(let elemento of this.TablaFunciones){
-            if(elemento.Identificador == Simbolo_objeto.Identificador){
-                return `La funcion ${Simbolo_objeto.Identificador} ya existe.`
+            if(elemento.Identificador == simbolo.Identificador){
+                return `La funcion ${simbolo.Identificador} ya existe.`
             }
         }
-        this.TablaFunciones.push(Simbolo_objeto);
+        this.TablaFunciones.push(simbolo);
     }
 
     //Obtener una funcion por su ID
@@ -131,20 +130,22 @@ class Tabla {
         <table id="tablaSimbolos" style="width:100%">
         <thead>
         <tr>
-        <th>Tipo acceso</th>
+        <th>Tipo</th>
         <th>Id</th>
-        <th>Tipo dato</th>
-        <th>Direccion</th>
+        <th>Valor</th>
+        <th>linea</th>
+        <th>columna</th>
         </tr>
         </thead>
         <tbody>
         `;
-        for (let Simbolo_objeto of this.TablaVariables) {
+        for (let Simbolo of this.TablaVariables) {
             html += `<tr>
-                    <td>${Simbolo_objeto.Tipoacceso}</td>
-                    <td>${Simbolo_objeto.Identificador}</td>
-                    <td>${Simbolo_objeto.Tipodato}</td>
-                    <td>${Simbolo_objeto.Direccion}</td>
+                    <td>${Simbolo.indentificador}</td>
+                    <td>${Simbolo.tipo}</td>
+                    <td>${Simbolo.valor}</td>
+                    <td>${Simbolo.linea}</td>
+                    <td>${Simbolo.columna}</td>
                     </tr>`
                 }
         html += `</tbody>
