@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "sourceMap": true,
+    "downlevelIteration": true
+  },
+  "files": ["./src/index.ts", "./src/index.d.ts", "src/Ast/Errores.ts", "src/Ast/Ast.ts", "./src/Controlador.ts", "./src/Analizar.ts"]
+}
