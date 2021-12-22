@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "baseUrl": "./resources/ambiente_prueba/src",
+      "sourceMap": true,
+      "downlevelIteration": true
+    },
+    "files": ["./resources/ambiente_prueba/src/index.ts", "./resources/ambiente_prueba/src/index.d.ts", "resources/ambiente_prueba/src/Ast/Errores.ts", "resources/ambiente_prueba/src/Ast/Ast.ts", "./resources/ambiente_prueba/src/Controlador.ts", "./resources/ambiente_prueba/src/Analizar.ts"]
+}

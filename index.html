@@ -1,9 +1,31 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <link rel="stylesheet" href="styles.css"> 
+
+    <script src="./resources/ambiente_prueba/codemirror-5.64.0/lib/codemirror.js"></script>
+
+     <!--<link rel="stylesheet" href="./resources/ambiente_prueba/codemirror-5.64.0/lib/codemirror.css">
+    <script src="./resources/ambiente_prueba/codemirror-5.64.0/mode/clike/clike.js"> </script>
+    <script src="./resources/ambiente_prueba/codemirror-5.64.0/addon/edit/closetag.js"></script>
+    <link rel="stylesheet" href="./resources/ambiente_prueba/codemirror-5.64.0/theme/gruvbox-dark.css">-->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
+    <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+   
+    <script> 
+        $.support.cors = true;
+    </script>
+
 </head>
 
 <title>
@@ -16,6 +38,18 @@
 <link rel="stylesheet" href="./resources/css/main.css">
 <link rel="stylesheet" href="./chart/chart.css">
 <link href="https://fonts.googleapis.com/css?family=Slabo+27px&display=swap" rel="stylesheet">
+
+<script src="./resources/ambiente_prueba/src/Traduccion3D/traductor.js"></script>
+<script src="./resources/ambiente_prueba/src/Traduccion3D/funcion.js"></script>
+<script src="./resources/ambiente_prueba/src/Traduccion3D/traducciones/encabezados.js"></script>
+<script src="./resources/ambiente_prueba/src/Traduccion3D/traducciones/declaracion.js"></script>
+<script src="./resources/ambiente_prueba/src/Traduccion3D/traducciones/impresiones.js"></script>
+<script src="./resources/ambiente_prueba/src/Traduccion3D/traducciones/operaciones.js"></script>
+<script src="./resources/ambiente_prueba/src/Traduccion3D/traducciones/flujos.js"></script>
+<script src="./resources/ambiente_prueba/src/Traduccion3D/traducciones/logicas.js"></script>
+
+<script type="module" src="./resources/ambiente_prueba/scripts/index.js"></script>
+
 
 <h1 class="Titulo"> Quetzal OCL2 </h1>
 
@@ -35,6 +69,10 @@
             </td>
         </tr>
     </table>
+
+    <a href="#about"><button class="btn" id="compilar">Compilar<i class=""></i></button></a>
+    <a href="#about"><button class="btn" id="Traduccir">Traduccir<i class=""></i></button></a>
+
 
     <h3 class="subtitulo"> RESULTADO </h3>
     <table>
