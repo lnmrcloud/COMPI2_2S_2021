@@ -5,7 +5,7 @@ import { TablaSimbolos } from './TablaSimbolos/TablaSimbolos';
 export class Analizador {
 
     public ejecutar(input): any {
-        console.log("SE INICIA EL ANALISIS DE LA ENTRADA");
+        console.log("SE HOLA INICIA EL ANALISIS DE LA ENTRADA");
 
         try {
             //let salida = sintactico.parse(input);
