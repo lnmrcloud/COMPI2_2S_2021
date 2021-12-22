@@ -3,7 +3,7 @@
 t.__esModule=!0,t.Analizador=void 0;
 
 
-var r=o(299),a=o(623),n=o(921),i=function(){function e(){}return e.prototype.ejecutar=function(e){console.log("SE INICIA EL ANALISIS DE LA ENTRADA");
+var r=o(299),a=o(623),n=o(921),i=function(){function e(){}return e.prototype.ejecutar=function(e){console.log("SE adios INICIA EL ANALISIS DE LA ENTRADA");
 
 
 try{console.log("----------- 0 -----------");
