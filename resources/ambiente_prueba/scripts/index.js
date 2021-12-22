@@ -52,15 +52,7 @@ try{try{for(var u=r(this.lista_instrucciones),h=u.next();
 
 !h.done;
 
-h=u.next())((d=h.value)instanceof n.default||d instanceof i.default)&&d.agregarSimboloFuncion(e,t)}catch(e){o={error:e}}finally{try{h&&!h.done&&(a=u.return)&&a.call(u)}finally{if(o)throw o.error}}e.appendTraduccion("#include <stdio.h>\nfloat heap[16384];
-
-\nfloat stack[16394];
-
-\nfloat P;
-
-\nfloat H;
-
-");
+h=u.next())((d=h.value)instanceof n.default||d instanceof i.default)&&d.agregarSimboloFuncion(e,t)}catch(e){o={error:e}}finally{try{h&&!h.done&&(a=u.return)&&a.call(u)}finally{if(o)throw o.error}}e.appendTraduccion("#include <stdio.h>\nfloat heap[16384];\nfloat stack[16394];\nfloat P;\nfloat H;");
 
 try{for(var p=r(this.lista_instrucciones),f=p.next();
 
@@ -106,9 +98,7 @@ t.__esModule=!0;
 
 var o=function(){function e(e,t){this.token=e,this.lexema=t,this.hijos=new Array}return e.prototype.agregarHijo=function(e){this.hijos.push(e)},e.prototype.getToken=function(){return this.token},e.prototype.graficarNodos=function(e,t){var o=0,r="",a=e.token;
 
-a=a.replace('"',""),r="node".concat(t,'[label = "').concat(a,'"];
-
-\n');
+a=a.replace('"',""),r="node".concat(t,'[label = "').concat(a,'"];\n');
 
 for(var n=0;
 
@@ -118,9 +108,7 @@ n++)r="".concat(r,"node").concat(t," -> node").concat(t).concat(o,"\n"),r+=this.
 
 if(!e.lexema.match("")||!e.lexema.match("")){var i=e.lexema;
 
-i=i.replace('"',""),r+="node".concat(t,'c[label = "').concat(i,'"];
-
-\n'),r+="node".concat(t," -> node").concat(t,"c\n")}return r},e.prototype.graficarSintactico=function(){return"digraph {\n\n".concat(this.graficarNodos(this,"0")," \n\n}")},e}();
+i=i.replace('"',""),r+="node".concat(t,'c[label = "').concat(i,'"];\n'),r+="node".concat(t," -> node").concat(t,"c\n")}return r},e.prototype.graficarSintactico=function(){return"digraph {\n\n".concat(this.graficarNodos(this,"0")," \n\n}")},e}();
 
 t.default=o},623:function(e,t){"use strict";
 
@@ -758,11 +746,7 @@ if(t.existeEnActual(h.identificador)){var p=new a.default("Semantico","La variab
 
 e.errores.push(p),e.append("ERROR SEMANTICO: La variable ".concat(h.identificador," ya existe en el entorno local, LINEA: ").concat(this.linea,", COLUMNA: ").concat(this.columna))}else if(null!=h.valor){var f=h.valor.getValor(e,t),d=h.valor.getTipo(e,t);
 
-d==this.type.type||d==l.tipo.DOBLE&&this.type.type==l.tipo.ENTERO||d==l.tipo.CADENA&&this.type.type==l.tipo.CARACTER?((g=new i.default(h.simbolo,this.type,h.identificador,f)).datos3D.posicion=o,g.datos3D.longitud=1,t.agregar(h.identificador,g),e.appendTraduccion("stack[(int)P] = "+g.datos3D.cadenaTraduccion+";
-
-"),e.appendTraduccion("P = P + 1;
-
-")):console.log("NO SON DEL MISMO TIPO")}else{var g=new i.default(h.simbolo,this.type,h.identificador,null);
+d==this.type.type||d==l.tipo.DOBLE&&this.type.type==l.tipo.ENTERO||d==l.tipo.CADENA&&this.type.type==l.tipo.CARACTER?((g=new i.default(h.simbolo,this.type,h.identificador,f)).datos3D.posicion=o,g.datos3D.longitud=1,t.agregar(h.identificador,g),e.appendTraduccion("stack[(int)P] = "+g.datos3D.cadenaTraduccion+";"),e.appendTraduccion("P = P + 1;")):console.log("NO SON DEL MISMO TIPO")}else{var g=new i.default(h.simbolo,this.type,h.identificador,null);
 
 t.agregar(h.identificador,g)}}}catch(e){n={error:e}}finally{try{u&&!u.done&&(s=c.return)&&s.call(c)}finally{if(n)throw n.error}}},e.prototype.ejecutar=function(e,t,o){var n,c;
 
@@ -856,13 +840,7 @@ var i=o(156),l=o(200),s=o(921),c=function(e){function t(t,o,r,a,n,i,l,s){var c=e
 
 return c.lista_instrucciones=i,c.linea=l,c.columna=s,c}return a(t,e),t.prototype.traducir=function(e,t,o){var r,a;
 
-e.appendTraduccion("void main() {\nP = 0;
-
- H = 0;
-
- ");
-
- var i=new s.TablaSimbolos(t,null);
+e.appendTraduccion("void main() {\nP = 0;H = 0;");var i=new s.TablaSimbolos(t,null);
 
 i.ant.sig=i;
 
@@ -872,9 +850,7 @@ try{for(var l=n(this.lista_instrucciones),c=l.next();
 
 c=l.next()){var u=c.value.traducir(e,i,null);
 
-if(null!=u)return u}}catch(e){r={error:e}}finally{try{c&&!c.done&&(a=l.return)&&a.call(l)}finally{if(r)throw r.error}}return e.appendTraduccion("return;
-
-"),e.appendTraduccion("}"),null},t.prototype.agregarSimboloFuncion=function(e,t){t.existe(this.identificador)||t.agregar(this.identificador,this)},t.prototype.ejecutar=function(e,t,o){var r,a,i=new s.TablaSimbolos(t,null);
+if(null!=u)return u}}catch(e){r={error:e}}finally{try{c&&!c.done&&(a=l.return)&&a.call(l)}finally{if(r)throw r.error}}return e.appendTraduccion("return;"),e.appendTraduccion("}"),null},t.prototype.agregarSimboloFuncion=function(e,t){t.existe(this.identificador)||t.agregar(this.identificador,this)},t.prototype.ejecutar=function(e,t,o){var r,a,i=new s.TablaSimbolos(t,null);
 
 i.ant.sig=i;
 
@@ -1062,9 +1038,7 @@ t.__esModule=!0;
 
 var r=o(156),a=function(){function e(){}return e.prototype.ejecutar=function(e,t,o){return this},e.prototype.traducir=function(e,t){throw new Error("Method not implemented.")},e.prototype.recorrer=function(){var e=new r.default("Continue","");
 
-return e.agregarHijo(new r.default(";
-
-","")),e},e}();
+return e.agregarHijo(new r.default(";","")),e},e}();
 
 t.default=a},87:(e,t,o)=>{"use strict";
 
@@ -1072,9 +1046,7 @@ t.__esModule=!0;
 
 var r=o(156),a=function(){function e(){}return e.prototype.ejecutar=function(e,t,o){return this},e.prototype.traducir=function(e,t){throw new Error("Method not implemented.")},e.prototype.recorrer=function(){var e=new r.default("Break","");
 
-return e.agregarHijo(new r.default(";
-
-","")),e},e}();
+return e.agregarHijo(new r.default(";","")),e},e}();
 
 t.default=a},483:(e,t,o)=>{"use strict";
 
@@ -1180,11 +1152,7 @@ if(g=(E=O.value).ejecutar(e,N,o),E instanceof l.default||g instanceof l.default)
 
 (E instanceof i.default||g instanceof i.default)&&this.actualizacion.ejecutar(e,N)}}catch(e){u={error:e}}finally{try{O&&!O.done&&(h=m.return)&&h.call(m)}finally{if(u)throw u.error}}this.actualizacion.ejecutar(e,p)}else y=new s.default("Semantico","La variable a utilizar en el for no es de tipo ENTERO(int)",this.linea,this.columna),e.errores.push(y),e.append("ERROR SEMANTICO: La variable a utilizar en el for no es de tipo ENTERO(int), LINEA: ".concat(this.linea,", COLUMNA: ").concat(this.columna))},e.prototype.recorrer=function(){var e,t,o=new a.default("FOR","");
 
-o.agregarHijo(new a.default("(","")),null!=this.declaracion?o.agregarHijo(this.declaracion.recorrer()):o.agregarHijo(this.asignacion.recorrer()),o.agregarHijo(new a.default(";
-
-","")),o.agregarHijo(this.condicion.recorrer()),o.agregarHijo(new a.default(";
-
-","")),o.agregarHijo(this.actualizacion.recorrer()),o.agregarHijo(new a.default(")","")),o.agregarHijo(new a.default("{",""));
+o.agregarHijo(new a.default("(","")),null!=this.declaracion?o.agregarHijo(this.declaracion.recorrer()):o.agregarHijo(this.asignacion.recorrer()),o.agregarHijo(new a.default(";","")),o.agregarHijo(this.condicion.recorrer()),o.agregarHijo(new a.default(";","")),o.agregarHijo(this.actualizacion.recorrer()),o.agregarHijo(new a.default(")","")),o.agregarHijo(new a.default("{",""));
 
 try{for(var n=r(this.lista_instrucciones),i=n.next();
 
@@ -2104,9 +2072,7 @@ case 83:return console.log("Reconocio: "+t.yytext),115;
 
 case 85:return 5;
 
-case 86:console.log("Error Lexico: "+t.yytext+", linea: "+(t.yylineno+1)+", columna: "+(t.yylloc.last_column+1)),new St.default("LEXICO","El caracter "+t.yytext+" no es parte del lenguaje",t.yylineno+1,t.yylloc.last_column+1)}},rules:[/^(?:\/\/.*)/i,/^(?:\/\*((\*+[^/*])|([^*]))*\**\*\/)/i,/^(?:\+\+)/i,/^(?:--)/i,/^(?:\[)/i,/^(?:\])/i,/^(?:\()/i,/^(?:\))/i,/^(?:\?)/i,/^(?::)/i,/^(?:,)/i,/^(?:\.)/i,/^(?:\*)/i,/^(?:\/)/i,/^(?:-)/i,/^(?:\+)/i,/^(?:\^)/i,/^(?:#)/i,/^(?:\$)/i,/^(?:%)/i,/^(?:==)/i,/^(?:=)/i,/^(?:!=)/i,/^(?:<=)/i,/^(?:<)/i,/^(?:>=)/i,/^(?:>)/i,/^(?:\|\|)/i,/^(?:&&)/i,/^(?:!)/i,/^(?:&)/i,/^(?:null\b)/i,/^(?:int\b)/i,/^(?:double\b)/i,/^(?:boolean\b)/i,/^(?:char\b)/i,/^(?:string\b)/i,/^(?:void\b)/i,/^(?:true\b)/i,/^(?:false\b)/i,/^(?:pow\b)/i,/^(?:sin\b)/i,/^(?:log10\b)/i,/^(?:cos\b)/i,/^(?:tan\b)/i,/^(?:sqrt\b)/i,/^(?:caracterOfPosition\b)/i,/^(?:subString\b)/i,/^(?:length\b)/i,/^(?:toUppercase\b)/i,/^(?:toLowercase\b)/i,/^(?:if\b)/i,/^(?:else\b)/i,/^(?:switch\b)/i,/^(?:case\b)/i,/^(?:default\b)/i,/^(?:do\b)/i,/^(?:while\b)/i,/^(?:for\b)/i,/^(?:in\b)/i,/^(?:break\b)/i,/^(?:continue\b)/i,/^(?:return\b)/i,/^(?:print\b)/i,/^(?:println\b)/i,/^(?:struct\b)/i,/^(?:parse\b)/i,/^(?:toint\b)/i,/^(?:todouble\b)/i,/^(?:typeof\b)/i,/^(?:begin\b)/i,/^(?:end\b)/i,/^(?:push\b)/i,/^(?:pop\b)/i,/^(?:main\b)/i,/^(?:graficar_ts\b)/i,/^(?:;
-
-)/i,/^(?:\{)/i,/^(?:\})/i,/^(?:([0-9]+(\.[0-9]+)\b))/i,/^(?:([0-9]+))/i,/^(?:([a-zñA-ZÑ_][a-zA-Z0-9Ññ_]*))/i,/^(?:(("((\\([\'\"\\ntr]))|([^\"\\]+))*")))/i,/^(?:(('((\\([\\ntr]))|([^\'\\]))')))/i,/^(?:[\s\r\n\t])/i,/^(?:$)/i,/^(?:.)/i],conditions:{INITIAL:{rules:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86],inclusive:!0}}};
+case 86:console.log("Error Lexico: "+t.yytext+", linea: "+(t.yylineno+1)+", columna: "+(t.yylloc.last_column+1)),new St.default("LEXICO","El caracter "+t.yytext+" no es parte del lenguaje",t.yylineno+1,t.yylloc.last_column+1)}},rules:[/^(?:\/\/.*)/i,/^(?:\/\*((\*+[^/*])|([^*]))*\**\*\/)/i,/^(?:\+\+)/i,/^(?:--)/i,/^(?:\[)/i,/^(?:\])/i,/^(?:\()/i,/^(?:\))/i,/^(?:\?)/i,/^(?::)/i,/^(?:,)/i,/^(?:\.)/i,/^(?:\*)/i,/^(?:\/)/i,/^(?:-)/i,/^(?:\+)/i,/^(?:\^)/i,/^(?:#)/i,/^(?:\$)/i,/^(?:%)/i,/^(?:==)/i,/^(?:=)/i,/^(?:!=)/i,/^(?:<=)/i,/^(?:<)/i,/^(?:>=)/i,/^(?:>)/i,/^(?:\|\|)/i,/^(?:&&)/i,/^(?:!)/i,/^(?:&)/i,/^(?:null\b)/i,/^(?:int\b)/i,/^(?:double\b)/i,/^(?:boolean\b)/i,/^(?:char\b)/i,/^(?:string\b)/i,/^(?:void\b)/i,/^(?:true\b)/i,/^(?:false\b)/i,/^(?:pow\b)/i,/^(?:sin\b)/i,/^(?:log10\b)/i,/^(?:cos\b)/i,/^(?:tan\b)/i,/^(?:sqrt\b)/i,/^(?:caracterOfPosition\b)/i,/^(?:subString\b)/i,/^(?:length\b)/i,/^(?:toUppercase\b)/i,/^(?:toLowercase\b)/i,/^(?:if\b)/i,/^(?:else\b)/i,/^(?:switch\b)/i,/^(?:case\b)/i,/^(?:default\b)/i,/^(?:do\b)/i,/^(?:while\b)/i,/^(?:for\b)/i,/^(?:in\b)/i,/^(?:break\b)/i,/^(?:continue\b)/i,/^(?:return\b)/i,/^(?:print\b)/i,/^(?:println\b)/i,/^(?:struct\b)/i,/^(?:parse\b)/i,/^(?:toint\b)/i,/^(?:todouble\b)/i,/^(?:typeof\b)/i,/^(?:begin\b)/i,/^(?:end\b)/i,/^(?:push\b)/i,/^(?:pop\b)/i,/^(?:main\b)/i,/^(?:graficar_ts\b)/i,/^(?:;)/i,/^(?:\{)/i,/^(?:\})/i,/^(?:([0-9]+(\.[0-9]+)\b))/i,/^(?:([0-9]+))/i,/^(?:([a-zñA-ZÑ_][a-zA-Z0-9Ññ_]*))/i,/^(?:(("((\\([\'\"\\ntr]))|([^\"\\]+))*")))/i,/^(?:(('((\\([\\ntr]))|([^\'\\]))')))/i,/^(?:[\s\r\n\t])/i,/^(?:$)/i,/^(?:.)/i],conditions:{INITIAL:{rules:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86],inclusive:!0}}};
 
 return e}();
 
