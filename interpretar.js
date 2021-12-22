@@ -142,8 +142,8 @@ function agrupar_consola_con_salto(resultado_print){
 }
 
 function agregar_a_tablasimbolos(simbolo){
-    console.log("en agregar tipo:" + simbolo.tipo + "id:" + simbolo.indentificador + "linea:" + simbolo.linea + "columna:" + simbolo.columna + "valor:" + simbolo.valor);
-    this.tablasimbolos.setVariable(simbolo);
+    //console.log("en agregar tipo:" + simbolo.tipo + "id:" + simbolo.indentificador + "linea:" + simbolo.linea + "columna:" + simbolo.columna + "valor:" + simbolo.valor);
+    //this.tablasimbolos.setVariable(simbolo);
 }
 
 function contar_simbolos(){
