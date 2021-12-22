@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="styles.css"> 
+
+    <script src="./resources/ambiente_prueba/codemirror-5.64.0/lib/codemirror.js"></script>
+
+     <!--<link rel="stylesheet" href="./resources/ambiente_prueba/codemirror-5.64.0/lib/codemirror.css">
+    <script src="./resources/ambiente_prueba/codemirror-5.64.0/mode/clike/clike.js"> </script>
+    <script src="./resources/ambiente_prueba/codemirror-5.64.0/addon/edit/closetag.js"></script>
+    <link rel="stylesheet" href="./resources/ambiente_prueba/codemirror-5.64.0/theme/gruvbox-dark.css">-->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
+    <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+   
+    <script> 
+        $.support.cors = true;
+    </script>
+
+</head>
+
+<title>
+   Quetzal OCL2
+</title>
+
+<link rel="stylesheet" href="./resources/css/codemirror.css">
+<link rel="stylesheet" href="./resources/css/isotope.css">
+<link rel="stylesheet" href="./resources/css/bootstrap.css">
+<link rel="stylesheet" href="./resources/css/main.css">
+<link rel="stylesheet" href="./chart/chart.css">
+<link href="https://fonts.googleapis.com/css?family=Slabo+27px&display=swap" rel="stylesheet">
+
+<script src="./resources/ambiente_prueba/src/Traduccion3D/traductor.js"></script>
+<script src="./resources/ambiente_prueba/src/Traduccion3D/funcion.js"></script>
+<script src="./resources/ambiente_prueba/src/Traduccion3D/traducciones/encabezados.js"></script>
+<script src="./resources/ambiente_prueba/src/Traduccion3D/traducciones/declaracion.js"></script>
+<script src="./resources/ambiente_prueba/src/Traduccion3D/traducciones/impresiones.js"></script>
+<script src="./resources/ambiente_prueba/src/Traduccion3D/traducciones/operaciones.js"></script>
+<script src="./resources/ambiente_prueba/src/Traduccion3D/traducciones/flujos.js"></script>
+<script src="./resources/ambiente_prueba/src/Traduccion3D/traducciones/logicas.js"></script>
+
+<script type="module" src="./resources/ambiente_prueba/scripts/index.js"></script>
+
+
+<h1 class="Titulo"> Quetzal OCL2 </h1>
+
+<body>
+    <h3 class="subtitulo">CODIGO C</h3>
+    <table>
+        <tr>
+            <td>
+                <!-- AREA DE TEXTO PARA Quetzal -->
+                <div id="ide">
+                    <textarea id="txtXML" class="txtarea" name="txtXML" rows="30" cols="245"></textarea>
+                    <br /><br />
+                    <input type="file" name="inputfile" id="inputfile">
+                     <!-- <input type="button" class="button" value="Analizar" onclick="interpretar();" /> <br /><br> -->
+
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <a href="#about"><button class="btn" id="compilar">Compilar<i class=""></i></button></a>
+    <a href="#about"><button class="btn" id="Traduccir">Traduccir<i class=""></i></button></a>
+
+
+    <h3 class="subtitulo"> RESULTADO </h3>
+    <table>
+        <tr>
+            <td>
+                <!-- AREA DE TEXTO PARA RESULTADO -->
+                <div id="ide3">
+                    <textarea id="console"  class="txtarea" name="console" rows="20" cols="245">>></textarea>
+                    <br /><br />
+                    <input type="button" class="button" value="Limpiar" onclick="javascript:clearConsole();" />
+                </div>  
+            </td>
+        </tr>
+    </table>
+    <h3 class="subtitulo"> REPORTES </h3>
+    <table>
+        <tr>
+            <td>
+                <!-- AREA DE TEXTO PARA REPORTES -->
+                <div id="ide3">  
+                    <br>              
+                    <input type="button" value="Interpretar"  onclick="interpretar();" />
+                    <input type="button" value="Traducir" onclick="traduccion();" />
+                    <input type="button" value="AST" onclick="graficar();"  />
+                    <input type="button" value="Tabla de Simbolos"  />
+                    <input type="button" value="Reporte Gramatical" onclick="reporte_gramatical();">
+                    <input type="button" value="Errores" onclick="mostrarErrores();">
+                    
+                    <br>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" colspan="3">  
+                <!-- AREA DE TEXTO PARA RESULTADO -->                
+                <div id="ide3">                    
+                    <textarea id="consola_traduccion"  name="console" style="resize:none; overflow-y: scroll; "   rows="10" cols="140"></textarea>
+                </div> 
+                <hr>
+                <br> 
+            </td>            
+        </tr>
+    </table>
+
+    <div id="errores" style="display:none">
+        <h2>Tabla de errores</h2>
+        <table id="tablaErrores" align="center" style="width:100%">
+            <tr>
+                <th>Tipo</th>
+                <th>Descripcion</th>
+                <th>Linea</th>
+                <th>Columna</th>
+            </tr>
+        </table>
+    </div>
+
+    <div id="gramatical_titulo"></div>
+        <h2>Reporte Gramatical</h2>
+    </div> 
+    <div id="gramatical_txt">                   
+        <textarea id="console"  name="console" style="resize:none; overflow-y: scroll; "   rows="10" cols="140"></textarea>
+    </div> 
+
+</body>
+
+<!-- AREA DE IMPORTS -->
+
+<script>var exports = {};</script>
+
+<script src="./Interfaces/Instruccion.js"></script>
+<script src="./Interfaces/Expresion.js"></script>
+<!-- AST -->
+<script src="./AST/AST.js"></script>
+<script src="./AST/Entorno.js"></script>
+<script src="./AST/Simbolo.js"></script>
+<script src="./AST/Tipo.js"></script>
+
+
+<!-- INSTRUCCIONES  -->
+
+<script src="./Instrucciones/Asignacion.js"></script>
+<script src="./Instrucciones/Break.js"></script>
+<script src="./Instrucciones/Case.js"></script>
+<script src="./Instrucciones/Continue.js"></script>
+<script src="./Instrucciones/Declaracion.js"></script>
+<script src="./Instrucciones/If.js"></script>
+<script src="./Instrucciones/Print.js"></script>
+<script src="./Instrucciones/Println.js"></script>
+<script src="./Instrucciones/Switch.js"></script>
+<script src="./Instrucciones/While.js"></script>
+<script src="./Instrucciones/DoWhile.js"></script>
+<script src="./Instrucciones/Return.js"></script>
+<script src="./Instrucciones/Funcion.js"></script>
+
+<!-- EXPRESIONES -->
+<script src="./Expresiones/AccesoName.js"></script>
+<script src="./Expresiones/Atributo.js"></script>
+<script src="./Expresiones/Operacion.js"></script>
+<script src="./Expresiones/Primitivo.js"></script>
+
+<!-- GRAMATICA -->
+
+<script src="./Gramatica/ast_ascend.js"></script>
+<script src="./Gramatica/gramatica.js"></script>
+<script src="./Gramatica/gramatical_asc.js"></script>
+
+<!-- HERRAMIENTAS  -->
+
+<script src="./resources/js/codemirror.js"></script>
+<script src="./resources/js/Jquery.js"></script>
+<script src="./resources/js/bootstrap.js"></script>
+<script src="./resources/mode/javascript/javascript.js"></script>
+<script src="./resources/mode/pascal/pascal.js"></script>
+<script src="./resources/js/main.js"></script>
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+<script src="./chart/chart.js"></script>
+
+<!-- INTERPRETACION  -->
+<script src="interpretar.js"></script> 
+
+<!-- ERRORES  -->
+<script src="./Error.js"></script>
+<script src="./ReporteErrores.js"></script>
+
+<!-- TABLA SIMBOLOS  -->
+<script src="./TablaSimbolo/Simbolo_objeto.js"></script>
+<script src="./TablaSimbolo/SimboloFuncion.js"></script>
+<script src="./TablaSimbolo/Tabla.js"></script>
+
+<script type="text/javascript">
+    document.getElementById('inputfile')
+        .addEventListener('change', function () {
+            var fr = new FileReader();
+            fr.onload = function () {
+                document.getElementById('txtXML')
+                    .textContent = fr.result;
+            }
+            fr.readAsText(this.files[0]);
+        })
+</script>
+
+<script>
+    
+    var entrada = CodeMirror.fromTextArea(document.getElementById("txtXML"), {
+        lineNumbers: true,
+        mode: "javascript"
+        
+    });    
+    entrada.setSize(1500, 500);
+
+    var salida = CodeMirror.fromTextArea(document.getElementById("console"), {        
+        mode: "javascript"        
+    });    
+    salida.setSize(1500, 100);
+
+    var consola_traduccion = CodeMirror.fromTextArea(document.getElementById("consola_traduccion"), {        
+        mode: "javascript"        
+    });    
+    consola_traduccion.setSize(1500, 100);
+
+</script>
+
+
+</html>
